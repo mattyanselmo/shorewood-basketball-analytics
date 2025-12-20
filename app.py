@@ -15,6 +15,24 @@ st.set_page_config(
     layout="wide"
 )
 
+# Custom CSS to make tabs larger
+st.markdown("""
+    <style>
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        padding: 10px 20px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #f0f2f6;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Title
 st.title("🏀 Basketball Analytics Dashboard")
 
