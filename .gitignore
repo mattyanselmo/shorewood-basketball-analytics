@@ -13,11 +13,7 @@ ENV/
 page_source.html
 page_screenshot.png
 output.html
-*.csv
-*.json
-game_changes.csv
-team_ratings_filtered.csv
-shorewood_games_filtered.csv
+
 
 # R
 .Rhistory
@@ -36,6 +32,4 @@ shorewood_games_filtered.csv
 .DS_Store
 Thumbs.db
 
-# Streamlit
-.streamlit/
 
