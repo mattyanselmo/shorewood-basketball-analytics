@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Data files (generated)
+page_source.html
+page_screenshot.png
+output.html
+*.csv
+*.json
+game_changes.csv
+team_ratings_filtered.csv
+shorewood_games_filtered.csv
+
+# R
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/
+
