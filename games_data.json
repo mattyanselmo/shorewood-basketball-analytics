@@ -233,11 +233,11 @@
     "venue": "Snohomish High School",
     "court": " Aux",
     "away_team": "Meadowdale",
-    "away_score": null,
+    "away_score": "7",
     "home_team": "Snohomish",
-    "home_score": null,
+    "home_score": "41",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, December 21, 2025",
@@ -245,11 +245,11 @@
     "venue": "Lake Stevens High School",
     "court": " Aux",
     "away_team": "Kamiak",
-    "away_score": null,
+    "away_score": "4",
     "home_team": "Lake Stevens",
-    "home_score": null,
+    "home_score": "19",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, December 21, 2025",
@@ -257,11 +257,11 @@
     "venue": "Glacier Peak High School",
     "court": " Aux",
     "away_team": "Monroe",
-    "away_score": null,
+    "away_score": "28",
     "home_team": "Glacier Peak",
-    "home_score": null,
+    "home_score": "16",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, December 21, 2025",
@@ -269,11 +269,11 @@
     "venue": "Mike Martin Gym",
     "court": "Main",
     "away_team": "Shorewood",
-    "away_score": null,
+    "away_score": "22",
     "home_team": "King's",
-    "home_score": null,
+    "home_score": "14",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, December 21, 2025",
@@ -281,11 +281,11 @@
     "venue": "Snohomish High School",
     "court": " Aux",
     "away_team": "Kamiak",
-    "away_score": null,
+    "away_score": "15",
     "home_team": "Snohomish",
-    "home_score": null,
+    "home_score": "28",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, December 21, 2025",
@@ -293,11 +293,11 @@
     "venue": "Lake Stevens High School",
     "court": " Aux",
     "away_team": "Getchell",
-    "away_score": null,
+    "away_score": "12",
     "home_team": "Lake Stevens",
-    "home_score": null,
+    "home_score": "22",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, December 21, 2025",
@@ -305,11 +305,11 @@
     "venue": "Shorewood High School",
     "court": " Aux",
     "away_team": "Meadowdale",
-    "away_score": null,
+    "away_score": "4",
     "home_team": "Shorewood",
-    "home_score": null,
+    "home_score": "21",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, December 21, 2025",
@@ -317,11 +317,11 @@
     "venue": "Stanwood High School",
     "court": " Aux",
     "away_team": "Arlington",
-    "away_score": null,
+    "away_score": "21",
     "home_team": "Stanwood",
-    "home_score": null,
+    "home_score": "28",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 4, 2026",

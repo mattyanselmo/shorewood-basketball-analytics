@@ -7,6 +7,7 @@ Streamlit app for Basketball Analytics
 import streamlit as st
 import pandas as pd
 import os
+import json
 
 # Page configuration
 st.set_page_config(
@@ -36,6 +37,20 @@ st.markdown("""
 # Title
 st.title("🏀 Basketball Analytics Dashboard")
 
+# Display last updated timestamp
+timestamp_file = "data_timestamp.json"
+if os.path.exists(timestamp_file):
+    try:
+        with open(timestamp_file, 'r', encoding='utf-8') as f:
+            timestamp_data = json.load(f)
+            last_updated = timestamp_data.get('timestamp_pst', timestamp_data.get('last_updated', 'Unknown'))
+            st.caption(f"Updated {last_updated}")
+    except Exception as e:
+        st.caption("Update timestamp unavailable")
+else:
+    # Default timestamp for now (Sunday, December 21, 9:10pm PST)
+    st.caption("Updated Sunday, December 21, 2025 at 09:10 PM PST")
+
 # Check if files exist
 shorewood_file = "shorewood_games_comparison.csv"
 ratings_file = "team_ratings.csv"
@@ -45,14 +60,14 @@ tab1, tab2 = st.tabs(["Shorewood Games", "Team Ratings"])
 
 # Tab 1: Shorewood Games
 with tab1:
-    st.header("Shorewood Game Results & Comparisons")
+    st.header("Shorewood Results & Schedule Changes")
     
     if os.path.exists(shorewood_file):
         # Load data
         df = pd.read_csv(shorewood_file)
         
         # Display summary stats
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3 = st.columns(3)
         
         with col1:
             st.metric("Total Games", len(df))
@@ -62,14 +77,10 @@ with tab1:
             st.metric("Games Changed", changed_count)
         
         with col3:
-            games_with_scores = len(df[(df['Home Score'].notna()) & (df['Home Score'] != '') & 
-                                       (df['Away Score'].notna()) & (df['Away Score'] != '')])
-            st.metric("Games with Scores", games_with_scores)
-        
-        with col4:
+            # Calculate wins and losses for Shorewood
+            wins = 0
+            losses = 0
             if 'Home Team' in df.columns and 'Away Team' in df.columns:
-                # Count wins (assuming Shorewood is in one of the columns)
-                wins = 0
                 for _, row in df.iterrows():
                     home_team = str(row.get('Home Team', ''))
                     away_team = str(row.get('Away Team', ''))
@@ -80,13 +91,20 @@ with tab1:
                         try:
                             home_score = float(home_score)
                             away_score = float(away_score)
-                            if home_team == 'Shorewood' and home_score > away_score:
-                                wins += 1
-                            elif away_team == 'Shorewood' and away_score > home_score:
-                                wins += 1
+                            if home_team == 'Shorewood':
+                                if home_score > away_score:
+                                    wins += 1
+                                elif away_score > home_score:
+                                    losses += 1
+                            elif away_team == 'Shorewood':
+                                if away_score > home_score:
+                                    wins += 1
+                                elif home_score > away_score:
+                                    losses += 1
                         except:
                             pass
-                st.metric("Shorewood Wins", wins)
+            record = f"{wins} - {losses}"
+            st.metric("Record", record)
         
         st.divider()
         
@@ -209,77 +227,96 @@ with tab1:
 
 # Tab 2: Team Ratings
 with tab2:
-    st.header("League Team Ratings")
+    st.header("Wesco Team Ratings")
     
     if os.path.exists(ratings_file):
         # Load data
         df_ratings = pd.read_csv(ratings_file)
         
-        # Search/filter
-        search_term = st.text_input("Search for a team:", "")
-        
-        if search_term:
-            filtered_ratings = df_ratings[
-                df_ratings['Team'].str.contains(search_term, case=False, na=False)
-            ]
-        else:
-            filtered_ratings = df_ratings.copy()
-        
-        # Show Shorewood's position if in the data (before the table)
-        shorewood_team = filtered_ratings[filtered_ratings['Team'].str.contains('shorewood', case=False, na=False)]
-        if len(shorewood_team) > 0:
-            # Calculate rank in the full dataset (not filtered)
-            df_ratings_sorted = df_ratings.sort_values('xMargin', ascending=False).reset_index(drop=True)
-            shorewood_idx = df_ratings_sorted[df_ratings_sorted['Team'].str.contains('shorewood', case=False, na=False)].index[0]
-            shorewood_rank = shorewood_idx + 1  # Rank is 1-based
-            
-            shorewood_rating = shorewood_team.iloc[0]
-            col1, col2 = st.columns(2)
-            with col1:
-                st.metric("Shorewood Rank", f"#{int(shorewood_rank)}")
-            with col2:
-                st.metric("Shorewood Rating", f"{float(shorewood_rating['xMargin']):.1f}")
-            
-            st.divider()
+        filtered_ratings = df_ratings.copy()
         
         if len(filtered_ratings) > 0:
+            # Show Shorewood's position if in the data (right before the table)
+            shorewood_team = filtered_ratings[filtered_ratings['Team'].str.contains('shorewood', case=False, na=False)]
+            if len(shorewood_team) > 0:
+                # Determine which rating column to use
+                if 'OLS_Rating' in df_ratings.columns:
+                    rating_col = 'OLS_Rating'
+                elif 'xMargin' in df_ratings.columns:
+                    rating_col = 'xMargin'
+                else:
+                    rating_col = None
+                
+                if rating_col:
+                    # Calculate rank in the full dataset (not filtered)
+                    df_ratings_sorted = df_ratings.sort_values(rating_col, ascending=False).reset_index(drop=True)
+                    shorewood_idx = df_ratings_sorted[df_ratings_sorted['Team'].str.contains('shorewood', case=False, na=False)].index[0]
+                    shorewood_rank = shorewood_idx + 1  # Rank is 1-based
+                    
+                    shorewood_rating = shorewood_team.iloc[0]
+                    # Place metrics side by side in a compact layout
+                    col1, col2, col3 = st.columns([1, 1, 2])
+                    with col1:
+                        st.metric("Shorewood Rank", f"#{int(shorewood_rank)}")
+                    with col2:
+                        st.metric("Shorewood Rating", f"{float(shorewood_rating[rating_col]):.1f}")
+                    
+                    st.divider()
+            
             # Format ratings for display
             display_ratings = filtered_ratings.copy()
             
-            # Format xMargin to one decimal place
-            if 'xMargin' in display_ratings.columns:
-                display_ratings['xMargin'] = display_ratings['xMargin'].apply(
+            # Use OLS_Rating if available, otherwise fall back to xMargin
+            if 'OLS_Rating' in display_ratings.columns:
+                rating_col = 'OLS_Rating'
+            elif 'xMargin' in display_ratings.columns:
+                rating_col = 'xMargin'
+            else:
+                rating_col = None
+            
+            if rating_col:
+                # Format rating to one decimal place
+                display_ratings['Rating'] = display_ratings[rating_col].apply(
                     lambda x: f"{float(x):.1f}" if pd.notna(x) else ""
                 )
+                
+                # Add ranking (based on full dataset, not filtered)
+                # Sort by the rating column to determine ranks
+                df_ratings_sorted = df_ratings.sort_values(rating_col, ascending=False).reset_index(drop=True)
+                df_ratings_sorted['Rank'] = range(1, len(df_ratings_sorted) + 1)
+                
+                # Merge ranks back to filtered results
+                display_ratings = display_ratings.merge(
+                    df_ratings_sorted[['Team', 'Rank']],
+                    on='Team',
+                    how='left'
+                )
+                
+                # Keep only Team, Rank, and Rating columns
+                display_ratings = display_ratings[['Team', 'Rank', 'Rating']]
+                
+                # Sort by rank
+                display_ratings = display_ratings.sort_values('Rank')
+                
+                # Display without background color formatting and without scrolling
+                # Use column_config to control column widths
+                # Set height to 'content' to show all rows without scrolling
+                st.dataframe(
+                    display_ratings,
+                    use_container_width=False,
+                    hide_index=True,
+                    height="content",  # Show all rows without scrolling
+                    column_config={
+                        "Rank": st.column_config.NumberColumn("Rank", width="small"),
+                        "Team": st.column_config.TextColumn("Team", width="medium"),
+                        "Rating": st.column_config.NumberColumn("Rating", width="small", format="%.1f")
+                    }
+                )
+            else:
+                st.error("No rating column found in the data")
             
-            # Add ranking (based on full dataset, not filtered)
-            # First, get ranks from full sorted dataset
-            df_ratings_sorted = df_ratings.sort_values('xMargin', ascending=False).reset_index(drop=True)
-            df_ratings_sorted['Rank'] = range(1, len(df_ratings_sorted) + 1)
-            
-            # Merge ranks back to filtered results
-            display_ratings = display_ratings.merge(
-                df_ratings_sorted[['Team', 'Rank']],
-                on='Team',
-                how='left'
-            )
-            
-            # Reorder columns to put Rank first
-            cols = ['Rank'] + [col for col in display_ratings.columns if col != 'Rank']
-            display_ratings = display_ratings[cols]
-            
-            # Sort by rank
-            display_ratings = display_ratings.sort_values('Rank')
-            
-            # Display without background color formatting
-            st.dataframe(
-                display_ratings,
-                use_container_width=True,
-                hide_index=True
-            )
-            
-            # Download button
-            csv = filtered_ratings.to_csv(index=False)
+            # Download button - use the display format
+            csv = display_ratings.to_csv(index=False)
             st.download_button(
                 label="Download ratings as CSV",
                 data=csv,

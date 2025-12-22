@@ -476,6 +476,15 @@ def main():
                 with open("games_data.json", "w", encoding="utf-8") as f:
                     json.dump(games, f, indent=2)
                 print("Saved game data to 'games_data.json'")
+                
+                # Save timestamp of when data was scraped
+                timestamp_data = {
+                    "last_updated": datetime.now().isoformat(),
+                    "timestamp_pst": datetime.now().strftime("%A, %B %d, %Y at %I:%M %p PST")
+                }
+                with open("data_timestamp.json", "w", encoding="utf-8") as f:
+                    json.dump(timestamp_data, f, indent=2)
+                print(f"Saved timestamp: {timestamp_data['timestamp_pst']}")
             else:
                 print("\nNo games found. Check 'page_source.html' and 'page_screenshot.png' to inspect the page structure.")
         else:

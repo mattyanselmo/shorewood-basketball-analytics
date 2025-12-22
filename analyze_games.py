@@ -7,7 +7,7 @@ Script to:
 import json
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import LassoCV
+from sklearn.linear_model import ElasticNetCV
 from datetime import datetime
 import re
 
@@ -164,14 +164,90 @@ def compare_games(current_file, previous_file, team_filter="Shorewood"):
     print()
     return output_df
 
-def calculate_team_ratings(games_file, margin_game_cap=99):
+def calculate_ols_ratings(games_file, margin_game_cap=99):
     """
-    Calculate team ratings using regularized regression (Lasso)
-    Similar to the R glmnet approach
+    Calculate team ratings using OLS (unpenalized) regression
+    Helper function to get OLS ratings for use in regularized model
     
     Args:
         games_file: Path to JSON file with game data
         margin_game_cap: Maximum margin to cap at (default 99)
+    
+    Returns:
+        Dictionary mapping team keys to OLS ratings
+    """
+    from sklearn.linear_model import LinearRegression
+    
+    # Load games data
+    games = load_games_data(games_file)
+    df = pd.DataFrame(games)
+    
+    # Filter games with scores
+    df = df[
+        df['away_score'].notna() & 
+        df['home_score'].notna() &
+        (df['away_score'] != '') &
+        (df['home_score'] != '')
+    ].copy()
+    
+    # Convert scores to numeric
+    df['away_score'] = pd.to_numeric(df['away_score'], errors='coerce')
+    df['home_score'] = pd.to_numeric(df['home_score'], errors='coerce')
+    df = df[df['away_score'].notna() & df['home_score'].notna()].copy()
+    
+    if len(df) == 0:
+        return {}
+    
+    # Create normalized team keys
+    df['home_key'] = df['home_team'].apply(normalize_team_name)
+    df['away_key'] = df['away_team'].apply(normalize_team_name)
+    
+    # Get all unique teams
+    teams = sorted(set(df['home_key'].dropna().tolist() + df['away_key'].dropna().tolist()))
+    
+    # Calculate home margin (capped)
+    df['home_margin'] = (df['home_score'] - df['away_score']).clip(-margin_game_cap, margin_game_cap)
+    
+    # Create design matrix
+    n_games = len(df)
+    n_teams = len(teams)
+    X = np.zeros((n_games, n_teams))
+    team_to_idx = {team: idx for idx, team in enumerate(teams)}
+    
+    for i, row in df.iterrows():
+        home_idx = team_to_idx.get(row['home_key'])
+        away_idx = team_to_idx.get(row['away_key'])
+        if home_idx is not None:
+            X[i, home_idx] = 1
+        if away_idx is not None:
+            X[i, away_idx] = -1
+    
+    y = df['home_margin'].values
+    
+    # Fit OLS (drop last team to avoid perfect multicollinearity)
+    X_reduced = X[:, :-1]
+    ols_model = LinearRegression(fit_intercept=True)
+    ols_model.fit(X_reduced, y)
+    
+    # Get coefficients and center them
+    coefficients = np.zeros(n_teams)
+    coefficients[:-1] = ols_model.coef_
+    coefficients = coefficients - coefficients.mean()  # Center
+    
+    # Return as dictionary
+    return {team: float(coefficients[idx]) for idx, team in enumerate(teams)}
+
+def calculate_team_ratings(games_file, margin_game_cap=99, use_lambda_1se=False, ols_ratings=None):
+    """
+    Calculate team ratings using regularized regression (Elastic Net)
+    Uses 50% L1 (Lasso) and 50% L2 (Ridge) penalty
+    Similar to the R glmnet approach with alpha=0.5
+    
+    Args:
+        games_file: Path to JSON file with game data
+        margin_game_cap: Maximum margin to cap at (default 99)
+        use_lambda_1se: If True, use 1-SE rule (lambda.1se). If False, use minimum error (lambda.min) (default: False)
+        ols_ratings: Optional dictionary of OLS ratings (team_key -> rating) for reference/comparison
     
     Returns:
         DataFrame with team ratings
@@ -244,26 +320,61 @@ def calculate_team_ratings(games_file, margin_game_cap=99):
     print(f"Number of games: {n_games}")
     print()
     
-    # Fit Lasso regression with cross-validation
-    print("Fitting regularized regression model...")
-    # Use LassoCV which is similar to cv.glmnet
+    # Fit Elastic Net regression with cross-validation
+    print("Fitting Elastic Net regression model (50% L1, 50% L2)...")
+    # Use ElasticNetCV with l1_ratio=0.5 for 50% mixing parameter
     # n_folds similar to nfolds in R
     n_folds = max(3, min(10, n_games // 2))  # Similar to R: length(df_matrix$home_margin) %/% 2
     
-    lasso_model = LassoCV(
+    elastic_net_model = ElasticNetCV(
+        l1_ratio=0.5,  # 50% L1 (Lasso), 50% L2 (Ridge)
         cv=n_folds,
         random_state=42,
         n_jobs=-1,
         max_iter=5000
     )
     
-    lasso_model.fit(X, y)
+    elastic_net_model.fit(X, y)
     
     # Get coefficients (ratings)
-    # Use lambda.1se equivalent - this is the largest lambda within 1 SE of minimum
-    # In sklearn, we can use alpha_ (the chosen alpha) or get the path
-    coefficients = lasso_model.coef_
-    intercept = lasso_model.intercept_
+    if use_lambda_1se:
+        # Use 1-SE rule: largest alpha within 1 SE of minimum error
+        # This is similar to lambda.1se in R's glmnet
+        mse_path = elastic_net_model.mse_path_  # Shape: (n_alphas, n_folds)
+        mean_mse = mse_path.mean(axis=1)  # Mean MSE across folds for each alpha
+        std_mse = mse_path.std(axis=1)  # Std of MSE across folds
+        
+        min_mse_idx = np.argmin(mean_mse)
+        min_mse = mean_mse[min_mse_idx]
+        min_mse_std = std_mse[min_mse_idx]
+        
+        # Find largest alpha within 1 SE of minimum
+        threshold = min_mse + min_mse_std
+        valid_indices = np.where(mean_mse <= threshold)[0]
+        
+        if len(valid_indices) > 0:
+            lambda_1se_idx = valid_indices[-1]  # Largest alpha (last index since alphas are in descending order)
+            alpha_1se = elastic_net_model.alphas_[lambda_1se_idx]
+            
+            # Refit with lambda.1se alpha
+            from sklearn.linear_model import ElasticNet
+            model_1se = ElasticNet(l1_ratio=0.5, alpha=alpha_1se, max_iter=5000)
+            model_1se.fit(X, y)
+            coefficients = model_1se.coef_
+            intercept = model_1se.intercept_
+            
+            print(f"Using lambda.1se rule: alpha = {alpha_1se:.6f}")
+            print(f"  (Minimum error alpha = {elastic_net_model.alpha_:.6f})")
+        else:
+            # Fallback to minimum if 1-SE rule doesn't work
+            print("Warning: Could not apply 1-SE rule, using minimum error alpha")
+            coefficients = elastic_net_model.coef_
+            intercept = elastic_net_model.intercept_
+    else:
+        # Use minimum error alpha (default, similar to lambda.min in R)
+        coefficients = elastic_net_model.coef_
+        intercept = elastic_net_model.intercept_
+        print(f"Using minimum error alpha: {elastic_net_model.alpha_:.6f}")
     
     # Create ratings DataFrame
     ratings_df = pd.DataFrame({
@@ -278,10 +389,14 @@ def calculate_team_ratings(games_file, margin_game_cap=99):
     ratings_df = ratings_df.sort_values('xMargin', ascending=False)
     ratings_df['xMargin'] = ratings_df['xMargin'].round(2)
     
-    # Convert team keys back to original names (or keep normalized)
-    # For now, keep normalized keys, but you can map back if needed
-    
-    print("Team Ratings (sorted by rating):")
+    # Add OLS ratings column if provided
+    if ols_ratings:
+        ratings_df['OLS_Rating'] = ratings_df['Team'].map(ols_ratings).round(2)
+        # Reorder columns: Team, Elastic Net Rating, OLS Rating
+        ratings_df = ratings_df[['Team', 'xMargin', 'OLS_Rating']]
+        print("Team Ratings (Elastic Net vs OLS, sorted by Elastic Net rating):")
+    else:
+        print("Team Ratings (sorted by rating):")
     print()
     print(ratings_df.to_string(index=False))
     print()
@@ -303,8 +418,18 @@ def main():
         # Part 1: Compare files (filtered for Shorewood)
         changes_df = compare_games(current_file, previous_file, team_filter=team_filter)
         
-        # Part 2: Calculate team ratings
-        ratings_df = calculate_team_ratings(current_file)
+        # Part 2: Calculate OLS ratings first
+        print("=" * 60)
+        print("Calculating OLS Ratings (for reference)")
+        print("=" * 60)
+        print()
+        ols_ratings = calculate_ols_ratings(current_file)
+        if ols_ratings:
+            print(f"Calculated OLS ratings for {len(ols_ratings)} teams")
+            print()
+        
+        # Part 3: Calculate team ratings with Elastic Net (using OLS as input)
+        ratings_df = calculate_team_ratings(current_file, use_lambda_1se=False, ols_ratings=ols_ratings)
         
         print("=" * 60)
         print("Analysis Complete!")
