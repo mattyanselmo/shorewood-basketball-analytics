@@ -138,18 +138,23 @@ with tab1:
             display_df = filtered_df.copy()
             
             # Convert scores to integers (remove decimals) - work with original data first
+            # Use None instead of empty string to avoid Arrow serialization issues
             def format_score(score):
                 if pd.isna(score) or score == '' or str(score).strip() == '':
-                    return ''
+                    return None  # Use None instead of '' for better Arrow compatibility
                 try:
                     return int(float(str(score)))
                 except (ValueError, TypeError):
-                    return ''
+                    return None
             
             if 'Home Score' in display_df.columns:
                 display_df['Home Score'] = display_df['Home Score'].apply(format_score)
+                # Convert to nullable integer type
+                display_df['Home Score'] = display_df['Home Score'].astype('Int64')
             if 'Away Score' in display_df.columns:
                 display_df['Away Score'] = display_df['Away Score'].apply(format_score)
+                # Convert to nullable integer type
+                display_df['Away Score'] = display_df['Away Score'].astype('Int64')
             
             # Apply styling: background color for changed rows AND bold for winners
             def format_row(row):
@@ -167,7 +172,7 @@ with tab1:
                 
                 # Check if we have valid scores
                 try:
-                    if home_score != '' and away_score != '':
+                    if pd.notna(home_score) and pd.notna(away_score) and home_score is not None and away_score is not None:
                         home_score_val = int(home_score) if isinstance(home_score, (int, float)) else int(str(home_score))
                         away_score_val = int(away_score) if isinstance(away_score, (int, float)) else int(str(away_score))
                         
@@ -208,7 +213,7 @@ with tab1:
             
             st.dataframe(
                 display_df.style.apply(format_row, axis=1),
-                use_container_width=True,
+                width='stretch',
                 hide_index=True
             )
             
@@ -251,7 +256,7 @@ with tab2:
                     normalized = re.sub(r"\s+", "_", normalized)
                     return normalized
                 
-                # Calculate wins and losses for each team
+                # Calculate wins, losses, and points allowed for each team
                 for game in games:
                     home_team = game.get('home_team', '')
                     away_team = game.get('away_team', '')
@@ -270,9 +275,9 @@ with tab2:
                             if home_key and away_key:
                                 # Initialize if needed
                                 if home_key not in wins_losses:
-                                    wins_losses[home_key] = {'wins': 0, 'losses': 0}
+                                    wins_losses[home_key] = {'wins': 0, 'losses': 0, 'points_allowed': 0}
                                 if away_key not in wins_losses:
-                                    wins_losses[away_key] = {'wins': 0, 'losses': 0}
+                                    wins_losses[away_key] = {'wins': 0, 'losses': 0, 'points_allowed': 0}
                                 
                                 # Count wins/losses
                                 if home_score > away_score:
@@ -281,6 +286,10 @@ with tab2:
                                 elif away_score > home_score:
                                     wins_losses[away_key]['wins'] += 1
                                     wins_losses[home_key]['losses'] += 1
+                                
+                                # Count points allowed (opponent's score)
+                                wins_losses[home_key]['points_allowed'] += away_score
+                                wins_losses[away_key]['points_allowed'] += home_score
                         except (ValueError, TypeError):
                             pass
             except Exception as e:
@@ -314,10 +323,9 @@ with tab2:
                     # Place metrics side by side in a compact layout
                     col1, col2, col3 = st.columns([1, 1, 2])
                     with col1:
-                        st.metric("Shorewood Rank", f"#{int(shorewood_rank)}")
-                    with col2:
                         st.metric("Shorewood Rating", rating_display)
-                    
+                    with col2:
+                        st.metric("Shorewood Rating Rank", f"#{int(shorewood_rank)} out of {len(df_ratings)}")
                     st.divider()
             
             # Format ratings for display
@@ -332,7 +340,7 @@ with tab2:
                 rating_col = None
             
             if rating_col:
-                # Add wins, losses, and win percentage
+                # Add wins, losses, win percentage, and points allowed
                 display_ratings['Wins'] = display_ratings['Team'].apply(
                     lambda x: wins_losses.get(x, {}).get('wins', 0) if x in wins_losses else 0
                 )
@@ -343,14 +351,17 @@ with tab2:
                     lambda row: (row['Wins'] / (row['Wins'] + row['Losses']) * 100) if (row['Wins'] + row['Losses']) > 0 else 0.0,
                     axis=1
                 )
+                display_ratings['Points Allowed'] = display_ratings['Team'].apply(
+                    lambda x: int(wins_losses.get(x, {}).get('points_allowed', 0)) if x in wins_losses else 0
+                )
                 
                 # Format rating to one decimal place (keep as float for sorting and styling)
                 display_ratings['Rating'] = display_ratings[rating_col].apply(
                     lambda x: float(x) if pd.notna(x) else 0.0
                 )
                 
-                # Sort by Win% first (descending), then by Rating (descending)
-                display_ratings = display_ratings.sort_values(['Win%', 'Rating'], ascending=[False, False])
+                # Sort by Win% first (descending), then by Points Allowed (ascending - fewer is better)
+                display_ratings = display_ratings.sort_values(['Win%', 'Points Allowed'], ascending=[False, True])
                 
                 # Calculate min, max, and median for gradient coloring
                 rating_min = display_ratings['Rating'].min()
@@ -392,8 +403,8 @@ with tab2:
                 # Format Rating as string for display
                 display_ratings['Rating'] = display_ratings['Rating'].apply(lambda x: f"{x:.1f}")
                 
-                # Reorder columns: Team, Wins, Losses, Win%, Rating
-                display_ratings = display_ratings[['Team', 'Wins', 'Losses', 'Win%', 'Rating']]
+                # Reorder columns: Team, Wins, Losses, Win%, Points Allowed, Rating
+                display_ratings = display_ratings[['Team', 'Wins', 'Losses', 'Win%', 'Points Allowed', 'Rating']]
                 
                 # Create a styled version with bold and colored Rating column
                 def style_rating_column(row):
@@ -412,7 +423,7 @@ with tab2:
                 # Display with styling
                 st.dataframe(
                     styled_df,
-                    use_container_width=False,
+                    width='content',
                     hide_index=True,
                     height="content",  # Show all rows without scrolling
                     column_config={
@@ -420,11 +431,14 @@ with tab2:
                         "Wins": st.column_config.NumberColumn("Wins", width="small"),
                         "Losses": st.column_config.NumberColumn("Losses", width="small"),
                         "Win%": st.column_config.TextColumn("Win%", width="small"),
+                        "Points Allowed": st.column_config.NumberColumn("Points Allowed", width="small"),
                         "Rating": st.column_config.TextColumn("Rating", width="small")
                     }
                 )
             else:
                 st.error("No rating column found in the data")
+            
+            st.write("Note: The ratings are a measure of how well a team has performed in terms of points scored and points allowed, controlled for their strength of schedule.")
             
             # Download button - use the display format
             csv = display_ratings.to_csv(index=False)
