@@ -8,6 +8,7 @@ import streamlit as st
 import pandas as pd
 import os
 import json
+import re
 
 # Page configuration
 st.set_page_config(
@@ -56,7 +57,7 @@ shorewood_file = "shorewood_games_comparison.csv"
 ratings_file = "team_ratings.csv"
 
 # Create tabs
-tab1, tab2 = st.tabs(["Shorewood Games", "Team Ratings"])
+tab1, tab2 = st.tabs(["Shorewood Games", "Team Standings"])
 
 # Tab 1: Shorewood Games
 with tab1:
@@ -225,13 +226,65 @@ with tab1:
         st.error(f"File not found: {shorewood_file}")
         st.info("Run the analyze_games.py script to generate the comparison file.")
 
-# Tab 2: Team Ratings
+# Tab 2: Team Standings
 with tab2:
-    st.header("Wesco Team Ratings")
+    st.header("Wesco Team Standings")
     
     if os.path.exists(ratings_file):
-        # Load data
+        # Load ratings data
         df_ratings = pd.read_csv(ratings_file)
+        
+        # Load games data to calculate wins/losses
+        games_file = "games_data.json"
+        wins_losses = {}
+        
+        if os.path.exists(games_file):
+            try:
+                with open(games_file, 'r', encoding='utf-8') as f:
+                    games = json.load(f)
+                
+                # Helper function to normalize team name (same as in analyze_games.py)
+                def normalize_team_name(team_name):
+                    if not team_name:
+                        return None
+                    normalized = re.sub(r"'", "", team_name.lower().strip())
+                    normalized = re.sub(r"\s+", "_", normalized)
+                    return normalized
+                
+                # Calculate wins and losses for each team
+                for game in games:
+                    home_team = game.get('home_team', '')
+                    away_team = game.get('away_team', '')
+                    home_score = game.get('home_score', '')
+                    away_score = game.get('away_score', '')
+                    
+                    # Only count games with valid scores
+                    if home_score and away_score and home_score != '' and away_score != '':
+                        try:
+                            home_score = float(home_score)
+                            away_score = float(away_score)
+                            
+                            home_key = normalize_team_name(home_team)
+                            away_key = normalize_team_name(away_team)
+                            
+                            if home_key and away_key:
+                                # Initialize if needed
+                                if home_key not in wins_losses:
+                                    wins_losses[home_key] = {'wins': 0, 'losses': 0}
+                                if away_key not in wins_losses:
+                                    wins_losses[away_key] = {'wins': 0, 'losses': 0}
+                                
+                                # Count wins/losses
+                                if home_score > away_score:
+                                    wins_losses[home_key]['wins'] += 1
+                                    wins_losses[away_key]['losses'] += 1
+                                elif away_score > home_score:
+                                    wins_losses[away_key]['wins'] += 1
+                                    wins_losses[home_key]['losses'] += 1
+                        except (ValueError, TypeError):
+                            pass
+            except Exception as e:
+                st.warning(f"Could not load games data: {e}")
         
         filtered_ratings = df_ratings.copy()
         
@@ -254,12 +307,16 @@ with tab2:
                     shorewood_rank = shorewood_idx + 1  # Rank is 1-based
                     
                     shorewood_rating = shorewood_team.iloc[0]
+                    rating_value = float(shorewood_rating[rating_col])
+                    # Format rating with "+" for positive values
+                    rating_display = f"+{rating_value:.1f}" if rating_value > 0 else f"{rating_value:.1f}"
+                    
                     # Place metrics side by side in a compact layout
                     col1, col2, col3 = st.columns([1, 1, 2])
                     with col1:
                         st.metric("Shorewood Rank", f"#{int(shorewood_rank)}")
                     with col2:
-                        st.metric("Shorewood Rating", f"{float(shorewood_rating[rating_col]):.1f}")
+                        st.metric("Shorewood Rating", rating_display)
                     
                     st.divider()
             
@@ -275,41 +332,95 @@ with tab2:
                 rating_col = None
             
             if rating_col:
-                # Format rating to one decimal place
+                # Add wins, losses, and win percentage
+                display_ratings['Wins'] = display_ratings['Team'].apply(
+                    lambda x: wins_losses.get(x, {}).get('wins', 0) if x in wins_losses else 0
+                )
+                display_ratings['Losses'] = display_ratings['Team'].apply(
+                    lambda x: wins_losses.get(x, {}).get('losses', 0) if x in wins_losses else 0
+                )
+                display_ratings['Win%'] = display_ratings.apply(
+                    lambda row: (row['Wins'] / (row['Wins'] + row['Losses']) * 100) if (row['Wins'] + row['Losses']) > 0 else 0.0,
+                    axis=1
+                )
+                
+                # Format rating to one decimal place (keep as float for sorting and styling)
                 display_ratings['Rating'] = display_ratings[rating_col].apply(
-                    lambda x: f"{float(x):.1f}" if pd.notna(x) else ""
+                    lambda x: float(x) if pd.notna(x) else 0.0
                 )
                 
-                # Add ranking (based on full dataset, not filtered)
-                # Sort by the rating column to determine ranks
-                df_ratings_sorted = df_ratings.sort_values(rating_col, ascending=False).reset_index(drop=True)
-                df_ratings_sorted['Rank'] = range(1, len(df_ratings_sorted) + 1)
+                # Sort by Win% first (descending), then by Rating (descending)
+                display_ratings = display_ratings.sort_values(['Win%', 'Rating'], ascending=[False, False])
                 
-                # Merge ranks back to filtered results
-                display_ratings = display_ratings.merge(
-                    df_ratings_sorted[['Team', 'Rank']],
-                    on='Team',
-                    how='left'
-                )
+                # Calculate min, max, and median for gradient coloring
+                rating_min = display_ratings['Rating'].min()
+                rating_max = display_ratings['Rating'].max()
+                rating_median = display_ratings['Rating'].median()
+                rating_range = rating_max - rating_min
                 
-                # Keep only Team, Rank, and Rating columns
-                display_ratings = display_ratings[['Team', 'Rank', 'Rating']]
+                # Function to get color based on rating value
+                # Using more saturated, darker colors for better visibility
+                def get_rating_color(value):
+                    if rating_range == 0:
+                        return '#B8860B'  # Dark goldenrod if all values are the same
+                    
+                    if value < rating_median:
+                        # Red to Dark Goldenrod (lower half)
+                        # Red: rgb(220, 20, 60) -> Dark Goldenrod: rgb(184, 134, 11)
+                        ratio = (value - rating_min) / (rating_median - rating_min) if rating_median > rating_min else 0
+                        r = int(220 - (220 - 184) * ratio)  # 220 -> 184
+                        g = int(20 + (134 - 20) * ratio)    # 20 -> 134
+                        b = int(60 + (11 - 60) * ratio)     # 60 -> 11
+                    else:
+                        # Dark Goldenrod to Dark Green (upper half)
+                        # Dark Goldenrod: rgb(184, 134, 11) -> Dark Green: rgb(0, 100, 0)
+                        ratio = (value - rating_median) / (rating_max - rating_median) if rating_max > rating_median else 1
+                        r = int(184 - 184 * ratio)      # 184 -> 0
+                        g = int(134 + (100 - 134) * ratio)  # 134 -> 100
+                        b = int(11 - 11 * ratio)        # 11 -> 0
+                    
+                    return f'rgb({r}, {g}, {b})'
                 
-                # Sort by rank
-                display_ratings = display_ratings.sort_values('Rank')
+                # Format columns for display
+                display_ratings['Win%'] = display_ratings['Win%'].apply(lambda x: f"{x:.1f}")
                 
-                # Display without background color formatting and without scrolling
-                # Use column_config to control column widths
-                # Set height to 'content' to show all rows without scrolling
+                # Keep numeric Rating for styling, create display version
+                rating_numeric = display_ratings['Rating'].copy()
+                # Create a mapping of team to numeric rating for easy lookup
+                team_rating_map = dict(zip(display_ratings['Team'], rating_numeric))
+                
+                # Format Rating as string for display
+                display_ratings['Rating'] = display_ratings['Rating'].apply(lambda x: f"{x:.1f}")
+                
+                # Reorder columns: Team, Wins, Losses, Win%, Rating
+                display_ratings = display_ratings[['Team', 'Wins', 'Losses', 'Win%', 'Rating']]
+                
+                # Create a styled version with bold and colored Rating column
+                def style_rating_column(row):
+                    styles = [''] * len(row)
+                    rating_idx = list(row.index).index('Rating')
+                    # Get the numeric rating value for this row using the mapping
+                    team_name = row['Team']
+                    team_rating = team_rating_map.get(team_name, 0.0)
+                    color = get_rating_color(team_rating)
+                    styles[rating_idx] = f'font-weight: bold; color: {color};'
+                    return styles
+                
+                # Apply styling
+                styled_df = display_ratings.style.apply(style_rating_column, axis=1)
+                
+                # Display with styling
                 st.dataframe(
-                    display_ratings,
+                    styled_df,
                     use_container_width=False,
                     hide_index=True,
                     height="content",  # Show all rows without scrolling
                     column_config={
-                        "Rank": st.column_config.NumberColumn("Rank", width="small"),
                         "Team": st.column_config.TextColumn("Team", width="medium"),
-                        "Rating": st.column_config.NumberColumn("Rating", width="small", format="%.1f")
+                        "Wins": st.column_config.NumberColumn("Wins", width="small"),
+                        "Losses": st.column_config.NumberColumn("Losses", width="small"),
+                        "Win%": st.column_config.TextColumn("Win%", width="small"),
+                        "Rating": st.column_config.TextColumn("Rating", width="small")
                     }
                 )
             else:
@@ -318,9 +429,9 @@ with tab2:
             # Download button - use the display format
             csv = display_ratings.to_csv(index=False)
             st.download_button(
-                label="Download ratings as CSV",
+                label="Download standings as CSV",
                 data=csv,
-                file_name="team_ratings_filtered.csv",
+                file_name="team_standings.csv",
                 mime="text/csv"
             )
         else:

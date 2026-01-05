@@ -329,11 +329,11 @@
     "venue": "Marysville-Pilchuck High School",
     "court": "Court 1",
     "away_team": "King's",
-    "away_score": null,
+    "away_score": "14",
     "home_team": "Getchell",
-    "home_score": null,
+    "home_score": "24",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 4, 2026",
@@ -341,11 +341,11 @@
     "venue": "Shorewood High School",
     "court": " Aux",
     "away_team": "Arlington",
-    "away_score": null,
+    "away_score": "6",
     "home_team": "Shorewood",
-    "home_score": null,
+    "home_score": "16",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 4, 2026",
@@ -353,23 +353,23 @@
     "venue": "Marysville-Pilchuck High School",
     "court": "Court 1",
     "away_team": "Kamiak",
-    "away_score": null,
+    "away_score": "18",
     "home_team": "Getchell",
-    "home_score": null,
+    "home_score": "35",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 4, 2026",
-    "time": "12:45 PM PST",
+    "time": "11:30 AM PST",
     "venue": "Lake Stevens High School",
     "court": " Aux",
     "away_team": "Snohomish",
-    "away_score": null,
+    "away_score": "11",
     "home_team": "Lake Stevens",
-    "home_score": null,
+    "home_score": "19",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 4, 2026",
@@ -377,35 +377,35 @@
     "venue": "Shorewood High School",
     "court": " Aux",
     "away_team": "Glacier Peak",
-    "away_score": null,
+    "away_score": "13",
     "home_team": "Shorewood",
-    "home_score": null,
+    "home_score": "25",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 4, 2026",
     "time": "1:00 PM PST",
     "venue": "Monroe High School",
     "court": "Main",
-    "away_team": "Stanwood",
-    "away_score": null,
+    "away_team": "Arlington",
+    "away_score": "22",
     "home_team": "Monroe",
-    "home_score": null,
+    "home_score": "36",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 4, 2026",
-    "time": "3:15 PM PST",
+    "time": "2:00 PM PST",
     "venue": "Lake Stevens High School",
     "court": " Aux",
     "away_team": "Stanwood",
-    "away_score": null,
+    "away_score": "17",
     "home_team": "Lake Stevens",
-    "home_score": null,
+    "home_score": "22",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 4, 2026",
@@ -413,23 +413,23 @@
     "venue": "Glacier Peak High School",
     "court": " Aux",
     "away_team": "King's",
-    "away_score": null,
+    "away_score": "8",
     "home_team": "Glacier Peak",
-    "home_score": null,
+    "home_score": "15",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 4, 2026",
     "time": "4:45 PM PST",
     "venue": "Monroe High School",
     "court": "Main",
-    "away_team": "Arlington",
-    "away_score": null,
+    "away_team": "Stanwood",
+    "away_score": "35",
     "home_team": "Monroe",
-    "home_score": null,
+    "home_score": "31",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -580,7 +580,7 @@
     "time": "12:30 PM PST",
     "venue": "Monroe High School",
     "court": "Main",
-    "away_team": "Arlington",
+    "away_team": "Shorewood",
     "away_score": null,
     "home_team": "Monroe",
     "home_score": null,
