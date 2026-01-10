@@ -10,6 +10,7 @@ import numpy as np
 from sklearn.linear_model import ElasticNetCV
 from datetime import datetime
 import re
+import os
 
 def load_games_data(filepath):
     """Load games data from JSON file"""
@@ -34,14 +35,14 @@ def create_game_key(game):
     teams = tuple(sorted([away, home])) if away and home else None
     return (teams, date) if teams else None
 
-def compare_games(current_file, previous_file, team_filter="Shorewood"):
+def compare_games(current_file, previous_file=None, team_filter="Shorewood"):
     """
     Compare two game data files and identify changes in date, time, or venue
     Optionally filter for a specific team
     
     Args:
         current_file: Path to current games JSON file
-        previous_file: Path to previous games JSON file
+        previous_file: Path to previous games JSON file (optional, if None, all games marked as changed)
         team_filter: Team name to filter for (default: "Shorewood")
     
     Returns:
@@ -55,11 +56,17 @@ def compare_games(current_file, previous_file, team_filter="Shorewood"):
     print()
     
     current_games = load_games_data(current_file)
-    previous_games = load_games_data(previous_file)
     
-    print(f"Current file: {len(current_games)} games")
-    print(f"Previous file: {len(previous_games)} games")
-    print()
+    if previous_file and os.path.exists(previous_file):
+        previous_games = load_games_data(previous_file)
+        print(f"Current file: {len(current_games)} games")
+        print(f"Previous file: {len(previous_games)} games")
+        print()
+    else:
+        previous_games = []
+        print(f"Current file: {len(current_games)} games")
+        print("Previous file: Not found (all games will be marked as changed)")
+        print()
     
     # Create dictionaries keyed by game identifier
     current_dict = {}
@@ -138,16 +145,17 @@ def compare_games(current_file, previous_file, team_filter="Shorewood"):
         output_df['Date_Sort'] = pd.to_datetime(output_df['Date'], format='%A, %B %d, %Y', errors='coerce')
         output_df = output_df.sort_values(['Date_Sort', 'Time']).drop('Date_Sort', axis=1)
         
-        # Save to CSV
-        output_filename = f'{team_filter.lower()}_games_comparison.csv' if team_filter else 'game_changes.csv'
-        output_df.to_csv(output_filename, index=False)
+        # Note: CSV saving is now handled in main() to support multiple grade levels
+        # output_filename = f'{team_filter.lower()}_games_comparison.csv' if team_filter else 'game_changes.csv'
+        # output_df.to_csv(output_filename, index=False)
         
         print(f"Found {len(output_games)} games")
         changed_count = sum(1 for g in output_games if g['CHANGED'] == 'YES')
         print(f"  - {changed_count} with changes")
         print(f"  - {len(output_games) - changed_count} unchanged")
         print()
-        print(f"Results saved to '{output_filename}'")
+        # Note: File saving is now handled in main() to support multiple grade levels
+        # print(f"Results saved to '{output_filename}'")
         print()
         
         # Print summary of changes
@@ -214,13 +222,14 @@ def calculate_ols_ratings(games_file, margin_game_cap=99):
     X = np.zeros((n_games, n_teams))
     team_to_idx = {team: idx for idx, team in enumerate(teams)}
     
-    for i, row in df.iterrows():
+    # Use enumerate to get sequential row index (df.iterrows() returns DataFrame index which may not be sequential)
+    for row_idx, (_, row) in enumerate(df.iterrows()):
         home_idx = team_to_idx.get(row['home_key'])
         away_idx = team_to_idx.get(row['away_key'])
         if home_idx is not None:
-            X[i, home_idx] = 1
+            X[row_idx, home_idx] = 1
         if away_idx is not None:
-            X[i, away_idx] = -1
+            X[row_idx, away_idx] = -1
     
     y = df['home_margin'].values
     
@@ -305,14 +314,15 @@ def calculate_team_ratings(games_file, margin_game_cap=99, use_lambda_1se=False,
     X = np.zeros((n_games, n_teams))
     team_to_idx = {team: idx for idx, team in enumerate(teams)}
     
-    for i, row in df.iterrows():
+    # Use enumerate to get sequential row index (df.iterrows() returns DataFrame index which may not be sequential)
+    for row_idx, (_, row) in enumerate(df.iterrows()):
         home_idx = team_to_idx.get(row['home_key'])
         away_idx = team_to_idx.get(row['away_key'])
         
         if home_idx is not None:
-            X[i, home_idx] = 1
+            X[row_idx, home_idx] = 1
         if away_idx is not None:
-            X[i, away_idx] = -1
+            X[row_idx, away_idx] = -1
     
     y = df['home_margin'].values
     
@@ -401,46 +411,93 @@ def calculate_team_ratings(games_file, margin_game_cap=99, use_lambda_1se=False,
     print(ratings_df.to_string(index=False))
     print()
     
-    # Save to CSV
-    ratings_df.to_csv('team_ratings.csv', index=False)
-    print("Ratings saved to 'team_ratings.csv'")
+    # Note: CSV saving is now handled in main() to support multiple grade levels
+    # ratings_df.to_csv('team_ratings.csv', index=False)
+    # print("Ratings saved to 'team_ratings.csv'")
     print()
     
     return ratings_df
 
 def main():
     """Main function"""
-    current_file = "games_data.json"
-    previous_file = "games_data_20251219.json"
+    import os
+    
+    # All grade levels to analyze
+    grade_levels = ["4th Girls", "5th Girls", "6th Girls", "7th Girls", "8th Girls"]
     team_filter = "Shorewood"  # Set to None to compare all games
     
-    try:
-        # Part 1: Compare files (filtered for Shorewood)
-        changes_df = compare_games(current_file, previous_file, team_filter=team_filter)
+    print("=" * 60)
+    print("Basketball Analytics - Multi-Grade Analysis")
+    print("=" * 60)
+    print()
+    
+    # Process each grade level
+    for grade_level in grade_levels:
+        grade_dir = grade_level.lower().replace(" ", "_")
+        current_file = os.path.join(grade_dir, "games_data.json")
         
-        # Part 2: Calculate OLS ratings first
-        print("=" * 60)
-        print("Calculating OLS Ratings (for reference)")
+        # Check if previous file exists (using a pattern that might exist)
+        previous_file = os.path.join(grade_dir, "games_data_prior.json")
+        if not os.path.exists(previous_file):
+            # Try to find any previous file in the directory
+            prev_files = [f for f in os.listdir(grade_dir) if f.startswith("games_data_") and f != "games_data.json"]
+            if prev_files:
+                previous_file = os.path.join(grade_dir, sorted(prev_files)[-1])  # Use most recent
+            else:
+                previous_file = None
+        
+        print("\n" + "=" * 60)
+        print(f"Analyzing {grade_level}")
         print("=" * 60)
         print()
-        ols_ratings = calculate_ols_ratings(current_file)
-        if ols_ratings:
-            print(f"Calculated OLS ratings for {len(ols_ratings)} teams")
+        
+        if not os.path.exists(current_file):
+            print(f"Warning: {current_file} not found. Skipping {grade_level}.")
+            continue
+        
+        try:
+            # Part 1: Compare files (filtered for Shorewood)
+            changes_df = compare_games(current_file, previous_file, team_filter=team_filter)
+            # Save comparison to grade directory
+            if not changes_df.empty:
+                if team_filter:
+                    output_filename = os.path.join(grade_dir, f'{team_filter.lower()}_games_comparison.csv')
+                else:
+                    output_filename = os.path.join(grade_dir, 'game_changes.csv')
+                changes_df.to_csv(output_filename, index=False)
+                print(f"Comparison saved to '{output_filename}'")
+            
+            # Part 2: Calculate OLS ratings first
+            print("\n" + "=" * 60)
+            print(f"Calculating OLS Ratings for {grade_level} (for reference)")
+            print("=" * 60)
             print()
-        
-        # Part 3: Calculate team ratings with Elastic Net (using OLS as input)
-        ratings_df = calculate_team_ratings(current_file, use_lambda_1se=False, ols_ratings=ols_ratings)
-        
-        print("=" * 60)
-        print("Analysis Complete!")
-        print("=" * 60)
-        
-    except FileNotFoundError as e:
-        print(f"Error: File not found - {e}")
-    except Exception as e:
-        print(f"Error: {e}")
-        import traceback
-        traceback.print_exc()
+            ols_ratings = calculate_ols_ratings(current_file)
+            if ols_ratings:
+                print(f"Calculated OLS ratings for {len(ols_ratings)} teams")
+                print()
+            
+            # Part 3: Calculate team ratings with Elastic Net (using OLS as input)
+            ratings_df = calculate_team_ratings(current_file, use_lambda_1se=False, ols_ratings=ols_ratings)
+            
+            # Save ratings to grade directory
+            if not ratings_df.empty:
+                ratings_file = os.path.join(grade_dir, "team_ratings.csv")
+                ratings_df.to_csv(ratings_file, index=False)
+                print(f"Ratings saved to '{ratings_file}'")
+            
+            print(f"\n{grade_level} analysis complete!")
+            
+        except FileNotFoundError as e:
+            print(f"Error: File not found - {e}")
+        except Exception as e:
+            print(f"Error analyzing {grade_level}: {e}")
+            import traceback
+            traceback.print_exc()
+    
+    print("\n" + "=" * 60)
+    print("All Grade Levels Analysis Complete!")
+    print("=" * 60)
 
 if __name__ == "__main__":
     main()

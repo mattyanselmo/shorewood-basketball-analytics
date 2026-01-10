@@ -38,8 +38,15 @@ st.markdown("""
 # Title
 st.title("🏀 Basketball Analytics Dashboard")
 
+# Grade level selection - using key to ensure proper state management
+grade_levels = ["4th Girls", "5th Girls", "6th Girls", "7th Girls", "8th Girls"]
+selected_grade = st.selectbox("Select Grade Level", grade_levels, index=0, key="grade_level_selectbox")
+
+# Get directory for selected grade - this will update when selectbox changes
+grade_dir = selected_grade.lower().replace(" ", "_")
+
 # Display last updated timestamp
-timestamp_file = "data_timestamp.json"
+timestamp_file = os.path.join(grade_dir, "data_timestamp.json")
 if os.path.exists(timestamp_file):
     try:
         with open(timestamp_file, 'r', encoding='utf-8') as f:
@@ -49,19 +56,19 @@ if os.path.exists(timestamp_file):
     except Exception as e:
         st.caption("Update timestamp unavailable")
 else:
-    # Default timestamp for now (Sunday, December 21, 9:10pm PST)
-    st.caption("Updated Sunday, December 21, 2025 at 09:10 PM PST")
+    st.caption("Update timestamp unavailable")
 
-# Check if files exist
-shorewood_file = "shorewood_games_comparison.csv"
-ratings_file = "team_ratings.csv"
+# Check if files exist for selected grade
+shorewood_file = os.path.join(grade_dir, "shorewood_games_comparison.csv")
+ratings_file = os.path.join(grade_dir, "team_ratings.csv")
+games_file = os.path.join(grade_dir, "games_data.json")
 
 # Create tabs
 tab1, tab2 = st.tabs(["Shorewood Games", "Team Standings"])
 
 # Tab 1: Shorewood Games
 with tab1:
-    st.header("Shorewood Results & Schedule Changes")
+    st.header(f"Shorewood Results & Schedule Changes - {selected_grade}")
     
     if os.path.exists(shorewood_file):
         # Load data
@@ -233,14 +240,13 @@ with tab1:
 
 # Tab 2: Team Standings
 with tab2:
-    st.header("Wesco Team Standings")
+    st.header(f"Wesco Team Standings - {selected_grade}")
     
     if os.path.exists(ratings_file):
         # Load ratings data
         df_ratings = pd.read_csv(ratings_file)
         
         # Load games data to calculate wins/losses
-        games_file = "games_data.json"
         wins_losses = {}
         
         if os.path.exists(games_file):
@@ -275,9 +281,9 @@ with tab2:
                             if home_key and away_key:
                                 # Initialize if needed
                                 if home_key not in wins_losses:
-                                    wins_losses[home_key] = {'wins': 0, 'losses': 0, 'points_allowed': 0}
+                                    wins_losses[home_key] = {'wins': 0, 'losses': 0, 'points_scored': 0, 'points_allowed': 0}
                                 if away_key not in wins_losses:
-                                    wins_losses[away_key] = {'wins': 0, 'losses': 0, 'points_allowed': 0}
+                                    wins_losses[away_key] = {'wins': 0, 'losses': 0, 'points_scored': 0, 'points_allowed': 0}
                                 
                                 # Count wins/losses
                                 if home_score > away_score:
@@ -286,6 +292,10 @@ with tab2:
                                 elif away_score > home_score:
                                     wins_losses[away_key]['wins'] += 1
                                     wins_losses[home_key]['losses'] += 1
+                                
+                                # Count points scored (team's own score)
+                                wins_losses[home_key]['points_scored'] += home_score
+                                wins_losses[away_key]['points_scored'] += away_score
                                 
                                 # Count points allowed (opponent's score)
                                 wins_losses[home_key]['points_allowed'] += away_score
@@ -351,17 +361,29 @@ with tab2:
                     lambda row: (row['Wins'] / (row['Wins'] + row['Losses']) * 100) if (row['Wins'] + row['Losses']) > 0 else 0.0,
                     axis=1
                 )
-                display_ratings['Points Allowed'] = display_ratings['Team'].apply(
+                # Calculate total points scored and allowed
+                total_points_scored = display_ratings['Team'].apply(
+                    lambda x: int(wins_losses.get(x, {}).get('points_scored', 0)) if x in wins_losses else 0
+                )
+                total_points_allowed = display_ratings['Team'].apply(
                     lambda x: int(wins_losses.get(x, {}).get('points_allowed', 0)) if x in wins_losses else 0
                 )
+                
+                # Calculate games played
+                games_played = display_ratings['Wins'] + display_ratings['Losses']
+                
+                # Calculate averages per game (avoid division by zero)
+                display_ratings['PF'] = (total_points_scored / games_played).fillna(0.0)
+                display_ratings['PA'] = (total_points_allowed / games_played).fillna(0.0)
+                display_ratings['Avg Margin'] = display_ratings['PF'] - display_ratings['PA']
                 
                 # Format rating to one decimal place (keep as float for sorting and styling)
                 display_ratings['Rating'] = display_ratings[rating_col].apply(
                     lambda x: float(x) if pd.notna(x) else 0.0
                 )
                 
-                # Sort by Win% first (descending), then by Points Allowed (ascending - fewer is better)
-                display_ratings = display_ratings.sort_values(['Win%', 'Points Allowed'], ascending=[False, True])
+                # Sort by Win% first (descending), then by PA (ascending - fewer is better)
+                display_ratings = display_ratings.sort_values(['Win%', 'PA'], ascending=[False, True])
                 
                 # Calculate min, max, and median for gradient coloring
                 rating_min = display_ratings['Rating'].min()
@@ -392,19 +414,12 @@ with tab2:
                     
                     return f'rgb({r}, {g}, {b})'
                 
-                # Format columns for display
-                display_ratings['Win%'] = display_ratings['Win%'].apply(lambda x: f"{x:.1f}")
+                # Keep Win% and Rating as numeric for proper sorting
+                # Create a mapping of team to numeric rating for color lookup
+                team_rating_map = dict(zip(display_ratings['Team'], display_ratings['Rating']))
                 
-                # Keep numeric Rating for styling, create display version
-                rating_numeric = display_ratings['Rating'].copy()
-                # Create a mapping of team to numeric rating for easy lookup
-                team_rating_map = dict(zip(display_ratings['Team'], rating_numeric))
-                
-                # Format Rating as string for display
-                display_ratings['Rating'] = display_ratings['Rating'].apply(lambda x: f"{x:.1f}")
-                
-                # Reorder columns: Team, Wins, Losses, Win%, Points Allowed, Rating
-                display_ratings = display_ratings[['Team', 'Wins', 'Losses', 'Win%', 'Points Allowed', 'Rating']]
+                # Reorder columns: Team, Wins, Losses, Win%, PF, PA, Avg Margin, Rating
+                display_ratings = display_ratings[['Team', 'Wins', 'Losses', 'Win%', 'PF', 'PA', 'Avg Margin', 'Rating']]
                 
                 # Create a styled version with bold and colored Rating column
                 def style_rating_column(row):
@@ -430,9 +445,31 @@ with tab2:
                         "Team": st.column_config.TextColumn("Team", width="medium"),
                         "Wins": st.column_config.NumberColumn("Wins", width="small"),
                         "Losses": st.column_config.NumberColumn("Losses", width="small"),
-                        "Win%": st.column_config.TextColumn("Win%", width="small"),
-                        "Points Allowed": st.column_config.NumberColumn("Points Allowed", width="small"),
-                        "Rating": st.column_config.TextColumn("Rating", width="small")
+                        "Win%": st.column_config.NumberColumn(
+                            "Win%", 
+                            width="small",
+                            format="%.1f"  # Format to 1 decimal place
+                        ),
+                        "PF": st.column_config.NumberColumn(
+                            "PF", 
+                            width="small",
+                            format="%.1f"  # Format to 1 decimal place
+                        ),
+                        "PA": st.column_config.NumberColumn(
+                            "PA", 
+                            width="small",
+                            format="%.1f"  # Format to 1 decimal place
+                        ),
+                        "Avg Margin": st.column_config.NumberColumn(
+                            "Avg Margin", 
+                            width="small",
+                            format="%.1f"  # Format to 1 decimal place
+                        ),
+                        "Rating": st.column_config.NumberColumn(
+                            "Rating", 
+                            width="small",
+                            format="%.1f"  # Format to 1 decimal place
+                        )
                     }
                 )
             else:
@@ -462,19 +499,26 @@ with st.sidebar:
     - **Shorewood Games**: All games for Shorewood with change tracking
     - **Team Ratings**: League-wide team ratings calculated using regularized regression
     
-    Data is updated by running the `analyze_games.py` script.
+    Data is updated by running the `scrape_exposure.py` and `analyze_games.py` scripts.
+    
+    Select a grade level from the dropdown above to view data for that grade.
     """)
     
     st.divider()
     
-    st.header("Files")
+    st.header(f"Files - {selected_grade}")
     if os.path.exists(shorewood_file):
-        st.success(f"✓ {shorewood_file}")
+        st.success(f"✓ shorewood_games_comparison.csv")
     else:
-        st.error(f"✗ {shorewood_file}")
+        st.error(f"✗ shorewood_games_comparison.csv")
     
     if os.path.exists(ratings_file):
-        st.success(f"✓ {ratings_file}")
+        st.success(f"✓ team_ratings.csv")
     else:
-        st.error(f"✗ {ratings_file}")
+        st.error(f"✗ team_ratings.csv")
+    
+    if os.path.exists(games_file):
+        st.success(f"✓ games_data.json")
+    else:
+        st.error(f"✗ games_data.json")
 

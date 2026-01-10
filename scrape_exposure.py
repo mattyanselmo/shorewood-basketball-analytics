@@ -111,6 +111,7 @@ def click_division_link(driver, division_name="4th Girls", timeout=10):
                 if division_id:
                     # Trigger the showDivision function directly via JavaScript
                     print(f"Triggering showDivision({division_id}) via JavaScript...")
+                    # Use the same approach that worked before, but ensure we're calling the right division
                     driver.execute_script(f"if (typeof ko !== 'undefined' && ko.dataFor) {{ var element = arguments[0]; var context = ko.dataFor(element); if (context && context.showDivision) {{ context.showDivision({division_id}); }} }}", target_link)
                     time.sleep(1)
                     # Also try regular click as backup
@@ -118,16 +119,27 @@ def click_division_link(driver, division_name="4th Girls", timeout=10):
                         target_link.click()
                     except:
                         driver.execute_script("arguments[0].click();", target_link)
+                    
+                    print(f"Clicked '{division_name}' link")
+                    time.sleep(3)  # Wait for content to load
+                    
+                    # Verify the correct division is showing by checking the page
+                    page_text = driver.page_source
+                    if division_name.lower() in page_text.lower():
+                        print(f"Verified: {division_name} content is visible on page")
+                    else:
+                        print(f"Warning: {division_name} content may not be visible on page")
+                    
+                    return True
                 else:
                     # Fallback to regular click
+                    print("Division ID not found, using regular click...")
                     try:
                         target_link.click()
                     except:
                         driver.execute_script("arguments[0].click();", target_link)
-                
-                print(f"Clicked '{division_name}' link")
-                time.sleep(3)  # Wait for content to load
-                return True
+                    time.sleep(3)  # Wait for content to load
+                    return True
             else:
                 print(f"Could not find '{division_name}' link")
                 # Try alternative: find by data-bind attribute
@@ -438,7 +450,12 @@ def scrape_boxscores(driver, timeout=10):
 
 def main():
     """Main function to orchestrate the scraping"""
+    import os
+    
     url = "https://basketball.exposureevents.com/256814/wesco-girls-aau/schedule"
+    
+    # All grade levels to scrape
+    grade_levels = ["4th Girls", "5th Girls", "6th Girls", "7th Girls", "8th Girls"]
     
     print("=" * 60)
     print("Exposure Basketball Events Scraper")
@@ -459,36 +476,81 @@ def main():
         print("Waiting for page to load...")
         time.sleep(3)
         
-        # Click on "4th Girls" division
-        if click_division_link(driver, division_name="4th Girls"):
-            print("Successfully clicked division link")
+        # Scrape each grade level
+        for grade_level in grade_levels:
+            print("\n" + "=" * 60)
+            print(f"Scraping {grade_level}")
+            print("=" * 60)
             
-            # Wait for content to load
-            print("Waiting for game data to load...")
-            time.sleep(3)
+            # Create subdirectory for this grade level
+            grade_dir = grade_level.lower().replace(" ", "_")
+            os.makedirs(grade_dir, exist_ok=True)
             
-            # Scrape the boxscores
-            games = scrape_boxscores(driver)
+            # Navigate back to the main schedule page to ensure clean state
+            # This ensures we're not seeing data from a previous division
+            print(f"Navigating to main schedule page...")
+            driver.get(url)
+            time.sleep(2)  # Wait for page to load
             
-            if games:
-                print(f"\nScraped {len(games)} games")
-                # Save to JSON
-                with open("games_data.json", "w", encoding="utf-8") as f:
-                    json.dump(games, f, indent=2)
-                print("Saved game data to 'games_data.json'")
+            # Wait for division links to be available
+            wait = WebDriverWait(driver, 10)
+            wait.until(EC.presence_of_element_located((By.CLASS_NAME, "display-8")))
+            time.sleep(1)
+            
+            # Click on the division link
+            if click_division_link(driver, division_name=grade_level):
+                print(f"Successfully clicked {grade_level} division link")
                 
-                # Save timestamp of when data was scraped
-                timestamp_data = {
-                    "last_updated": datetime.now().isoformat(),
-                    "timestamp_pst": datetime.now().strftime("%A, %B %d, %Y at %I:%M %p PST")
-                }
-                with open("data_timestamp.json", "w", encoding="utf-8") as f:
-                    json.dump(timestamp_data, f, indent=2)
-                print(f"Saved timestamp: {timestamp_data['timestamp_pst']}")
+                # Wait for content to load
+                print("Waiting for game data to load...")
+                time.sleep(3)
+                
+                # Scrape the boxscores
+                games = scrape_boxscores(driver)
+                
+                # Verify we got the correct division's data
+                if games:
+                    # Check if any games have the division field matching our target
+                    matching_games = [g for g in games if g.get('division', '').strip() == grade_level]
+                    if matching_games:
+                        print(f"Verified: Found {len(matching_games)} games with division '{grade_level}'")
+                    else:
+                        # Check what divisions we actually got
+                        found_divisions = set([g.get('division', '').strip() for g in games if g.get('division')])
+                        if found_divisions:
+                            print(f"Warning: Expected division '{grade_level}', but found divisions: {found_divisions}")
+                        else:
+                            print(f"Warning: No division information found in scraped games")
+                    
+                    print(f"\nScraped {len(games)} games for {grade_level}")
+                    
+                    # Save to JSON in grade subdirectory
+                    games_file = os.path.join(grade_dir, "games_data.json")
+                    with open(games_file, "w", encoding="utf-8") as f:
+                        json.dump(games, f, indent=2)
+                    print(f"Saved game data to '{games_file}'")
+                    
+                    # Save timestamp of when data was scraped
+                    timestamp_data = {
+                        "last_updated": datetime.now().isoformat(),
+                        "timestamp_pst": datetime.now().strftime("%A, %B %d, %Y at %I:%M %p PST")
+                    }
+                    timestamp_file = os.path.join(grade_dir, "data_timestamp.json")
+                    with open(timestamp_file, "w", encoding="utf-8") as f:
+                        json.dump(timestamp_data, f, indent=2)
+                    print(f"Saved timestamp: {timestamp_data['timestamp_pst']}")
+                else:
+                    print(f"\nNo games found for {grade_level}. Check 'page_source.html' and 'page_screenshot.png' to inspect the page structure.")
             else:
-                print("\nNo games found. Check 'page_source.html' and 'page_screenshot.png' to inspect the page structure.")
-        else:
-            print("Failed to click division link")
+                print(f"Failed to click {grade_level} division link")
+            
+            # Wait a bit before moving to next grade level
+            time.sleep(2)
+        
+        print("\n" + "=" * 60)
+        print("Scraping Complete!")
+        print("=" * 60)
+        print(f"Scraped data for {len(grade_levels)} grade levels")
             
     except Exception as e:
         print(f"Error: {e}")
