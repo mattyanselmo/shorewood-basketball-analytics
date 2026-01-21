@@ -557,11 +557,11 @@
     "venue": "Stanwood High School",
     "court": "Main",
     "away_team": "Mountlake Terrace",
-    "away_score": null,
+    "away_score": "53",
     "home_team": "Stanwood",
-    "home_score": null,
+    "home_score": "35",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -569,11 +569,11 @@
     "venue": "Everett High School",
     "court": "Main",
     "away_team": "Snohomish",
-    "away_score": null,
+    "away_score": "64",
     "home_team": "Everett",
-    "home_score": null,
+    "home_score": "25",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -581,11 +581,11 @@
     "venue": "Marysville-Pilchuck High School",
     "court": "Court 2",
     "away_team": "Edmonds-Woodway",
-    "away_score": null,
+    "away_score": "20",
     "home_team": "Getchell",
-    "home_score": null,
+    "home_score": "64",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -593,11 +593,11 @@
     "venue": "Mike Martin Gym",
     "court": "Main",
     "away_team": "Jackson",
-    "away_score": null,
+    "away_score": "37",
     "home_team": "King's",
-    "home_score": null,
+    "home_score": "31",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -605,11 +605,11 @@
     "venue": "Shorewood High School",
     "court": "Main",
     "away_team": "Cedarcrest",
-    "away_score": null,
+    "away_score": "47",
     "home_team": "Shorewood",
-    "home_score": null,
+    "home_score": "36",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -617,11 +617,11 @@
     "venue": "Haller Middle School",
     "court": "Main",
     "away_team": "Snohomish",
-    "away_score": null,
+    "away_score": "37",
     "home_team": "Arlington",
-    "home_score": null,
+    "home_score": "29",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -629,11 +629,11 @@
     "venue": "Everett High School",
     "court": "Main",
     "away_team": "Lake Stevens",
-    "away_score": null,
+    "away_score": "73",
     "home_team": "Everett",
-    "home_score": null,
+    "home_score": "25",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -641,11 +641,11 @@
     "venue": "Stanwood High School",
     "court": "Main",
     "away_team": "Edmonds-Woodway",
-    "away_score": null,
+    "away_score": "18",
     "home_team": "Stanwood",
-    "home_score": null,
+    "home_score": "63",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -653,11 +653,11 @@
     "venue": "Marysville-Pilchuck High School",
     "court": "Court 1",
     "away_team": "Mountlake Terrace",
-    "away_score": null,
+    "away_score": "34",
     "home_team": "Getchell",
-    "home_score": null,
+    "home_score": "45",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -665,11 +665,11 @@
     "venue": "Meadowdale High School",
     "court": " Aux",
     "away_team": "Glacier Peak",
-    "away_score": null,
+    "away_score": "46",
     "home_team": "Lynnwood",
-    "home_score": null,
+    "home_score": "48",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -677,11 +677,11 @@
     "venue": "Mike Martin Gym",
     "court": "Main",
     "away_team": "Cedarcrest",
-    "away_score": null,
+    "away_score": "33",
     "home_team": "King's",
-    "home_score": null,
+    "home_score": "51",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -689,11 +689,11 @@
     "venue": "Haller Middle School",
     "court": "Main",
     "away_team": "Lake Stevens",
-    "away_score": null,
+    "away_score": "72",
     "home_team": "Arlington",
-    "home_score": null,
+    "home_score": "22",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -701,11 +701,11 @@
     "venue": "Valley View Middle School",
     "court": "Main",
     "away_team": "Cedarcrest",
-    "away_score": null,
+    "away_score": "38",
     "home_team": "Glacier Peak",
-    "home_score": null,
+    "home_score": "55",
     "division": "8th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -713,8 +713,20 @@
     "venue": "Meadowdale High School",
     "court": "Main",
     "away_team": "Jackson",
-    "away_score": null,
+    "away_score": "48",
     "home_team": "Lynnwood",
+    "home_score": "47",
+    "division": "8th Girls",
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
+    "time": "9:00 AM PST",
+    "venue": "Valley View Middle School",
+    "court": "Main",
+    "away_team": "King's",
+    "away_score": null,
+    "home_team": "Glacier Peak",
     "home_score": null,
     "division": "8th Girls",
     "game_type": "Pool A"
@@ -733,12 +745,36 @@
   },
   {
     "date": "Sunday, January 25, 2026",
-    "time": "10:00 AM PST",
-    "venue": "Valley View Middle School",
+    "time": "9:30 AM PST",
+    "venue": "Mountlake Terrace High school",
     "court": "Main",
-    "away_team": "King's",
+    "away_team": "Snohomish",
     "away_score": null,
-    "home_team": "Glacier Peak",
+    "home_team": "Mountlake Terrace",
+    "home_score": null,
+    "division": "8th Girls",
+    "game_type": "Pool A"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
+    "time": "10:15 AM PST",
+    "venue": "Jackson High School",
+    "court": "Court 2",
+    "away_team": "Shorewood",
+    "away_score": null,
+    "home_team": "Jackson",
+    "home_score": null,
+    "division": "8th Girls",
+    "game_type": "Pool A"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
+    "time": "11:30 AM PST",
+    "venue": "Meadowdale High School",
+    "court": "Main",
+    "away_team": "Getchell",
+    "away_score": null,
+    "home_team": "Lynnwood",
     "home_score": null,
     "division": "8th Girls",
     "game_type": "Pool A"
@@ -758,18 +794,6 @@
   {
     "date": "Sunday, January 25, 2026",
     "time": "11:45 AM PST",
-    "venue": "Jackson High School",
-    "court": "Court 2",
-    "away_team": "Shorewood",
-    "away_score": null,
-    "home_team": "Jackson",
-    "home_score": null,
-    "division": "8th Girls",
-    "game_type": "Pool A"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "11:45 AM PST",
     "venue": "Edmonds-Woodway High School",
     "court": "Court 2",
     "away_team": "Snohomish",
@@ -793,31 +817,7 @@
   },
   {
     "date": "Sunday, January 25, 2026",
-    "time": "1:15 PM PST",
-    "venue": "Meadowdale High School",
-    "court": "Main",
-    "away_team": "Getchell",
-    "away_score": null,
-    "home_team": "Lynnwood",
-    "home_score": null,
-    "division": "8th Girls",
-    "game_type": "Pool A"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "1:45 PM PST",
-    "venue": "Valley View Middle School",
-    "court": "Main",
-    "away_team": "Shorewood",
-    "away_score": null,
-    "home_team": "Glacier Peak",
-    "home_score": null,
-    "division": "8th Girls",
-    "game_type": "Pool A"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "2:15 PM PST",
+    "time": "12:45 PM PST",
     "venue": "Jackson High School",
     "court": "Court 1",
     "away_team": "King's",
@@ -829,12 +829,24 @@
   },
   {
     "date": "Sunday, January 25, 2026",
-    "time": "2:30 PM PST",
-    "venue": "Mountlake Terrace High school",
+    "time": "12:45 PM PST",
+    "venue": "Valley View Middle School",
     "court": "Main",
-    "away_team": "Snohomish",
+    "away_team": "Shorewood",
     "away_score": null,
-    "home_team": "Mountlake Terrace",
+    "home_team": "Glacier Peak",
+    "home_score": null,
+    "division": "8th Girls",
+    "game_type": "Pool A"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
+    "time": "2:00 PM PST",
+    "venue": "Meadowdale High School",
+    "court": "Main",
+    "away_team": "Stanwood",
+    "away_score": null,
+    "home_team": "Lynnwood",
     "home_score": null,
     "division": "8th Girls",
     "game_type": "Pool A"
@@ -847,18 +859,6 @@
     "away_team": "Arlington",
     "away_score": null,
     "home_team": "Cedarcrest",
-    "home_score": null,
-    "division": "8th Girls",
-    "game_type": "Pool A"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "3:45 PM PST",
-    "venue": "Meadowdale High School",
-    "court": " Aux",
-    "away_team": "Stanwood",
-    "away_score": null,
-    "home_team": "Lynnwood",
     "home_score": null,
     "division": "8th Girls",
     "game_type": "Pool A"

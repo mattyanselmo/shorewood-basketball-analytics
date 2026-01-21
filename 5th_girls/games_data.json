@@ -545,11 +545,11 @@
     "venue": "Everett High School",
     "court": " Aux",
     "away_team": "Snohomish",
-    "away_score": null,
+    "away_score": "39",
     "home_team": "Everett",
-    "home_score": null,
+    "home_score": "2",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -557,11 +557,11 @@
     "venue": "Stanwood High School",
     "court": " Aux",
     "away_team": "Mountlake Terrace",
-    "away_score": null,
+    "away_score": "19",
     "home_team": "Stanwood",
-    "home_score": null,
+    "home_score": "39",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -569,11 +569,11 @@
     "venue": "Kamiak High School",
     "court": "Main",
     "away_team": "Jackson",
-    "away_score": null,
+    "away_score": "32",
     "home_team": "Kamiak",
-    "home_score": null,
+    "home_score": "7",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -581,11 +581,11 @@
     "venue": "Shorewood High School",
     "court": " Aux",
     "away_team": "Monroe",
-    "away_score": null,
+    "away_score": "33",
     "home_team": "Shorewood",
-    "home_score": null,
+    "home_score": "7",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -593,11 +593,11 @@
     "venue": "Haller Middle School",
     "court": " Aux",
     "away_team": "Snohomish",
-    "away_score": null,
+    "away_score": "25",
     "home_team": "Arlington",
-    "home_score": null,
+    "home_score": "17",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -605,11 +605,11 @@
     "venue": "Everett High School",
     "court": " Aux",
     "away_team": "Lake Stevens",
-    "away_score": null,
+    "away_score": "29",
     "home_team": "Everett",
-    "home_score": null,
+    "home_score": "16",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -617,11 +617,11 @@
     "venue": "Stanwood High School",
     "court": "Main",
     "away_team": "Edmonds-Woodway",
-    "away_score": null,
+    "away_score": "15",
     "home_team": "Stanwood",
-    "home_score": null,
+    "home_score": "51",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -629,11 +629,11 @@
     "venue": "Meadowdale High School",
     "court": " Aux",
     "away_team": "Glacier Peak",
-    "away_score": null,
+    "away_score": "33",
     "home_team": "Meadowdale",
-    "home_score": null,
+    "home_score": "3",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -641,11 +641,11 @@
     "venue": "King's Garden Gym",
     "court": "Main",
     "away_team": "Monroe",
-    "away_score": null,
+    "away_score": "25",
     "home_team": "King's",
-    "home_score": null,
+    "home_score": "48",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -653,11 +653,11 @@
     "venue": "Shorewood High School",
     "court": " Aux",
     "away_team": "Cedarcrest",
-    "away_score": null,
+    "away_score": "19",
     "home_team": "Shorewood",
-    "home_score": null,
+    "home_score": "22",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -665,11 +665,11 @@
     "venue": "Haller Middle School",
     "court": " Aux",
     "away_team": "Lake Stevens",
-    "away_score": null,
+    "away_score": "27",
     "home_team": "Arlington",
-    "home_score": null,
+    "home_score": "20",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -677,11 +677,11 @@
     "venue": "Kamiak High School",
     "court": "Main",
     "away_team": "Glacier Peak",
-    "away_score": null,
+    "away_score": "51",
     "home_team": "Kamiak",
-    "home_score": null,
+    "home_score": "22",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -689,11 +689,11 @@
     "venue": "King's Garden Gym",
     "court": "Main",
     "away_team": "Cedarcrest",
-    "away_score": null,
+    "away_score": "20",
     "home_team": "King's",
-    "home_score": null,
+    "home_score": "44",
     "division": "5th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 11, 2026",
@@ -701,8 +701,20 @@
     "venue": "Meadowdale High School",
     "court": " Aux",
     "away_team": "Jackson",
-    "away_score": null,
+    "away_score": "28",
     "home_team": "Meadowdale",
+    "home_score": "16",
+    "division": "5th Girls",
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
+    "time": "9:00 AM PST",
+    "venue": "Jackson High School",
+    "court": "Court 1",
+    "away_team": "Shorewood",
+    "away_score": null,
+    "home_team": "Jackson",
     "home_score": null,
     "division": "5th Girls",
     "game_type": "Pool A"
@@ -710,11 +722,11 @@
   {
     "date": "Sunday, January 25, 2026",
     "time": "9:00 AM PST",
-    "venue": "Kamiak High School",
-    "court": "Main",
-    "away_team": "Stanwood",
+    "venue": "Valley View Middle School",
+    "court": " Aux",
+    "away_team": "King's",
     "away_score": null,
-    "home_team": "Kamiak",
+    "home_team": "Glacier Peak",
     "home_score": null,
     "division": "5th Girls",
     "game_type": "Pool A"
@@ -733,24 +745,24 @@
   },
   {
     "date": "Sunday, January 25, 2026",
-    "time": "10:00 AM PST",
-    "venue": "Valley View Middle School",
-    "court": " Aux",
-    "away_team": "King's",
+    "time": "10:15 AM PST",
+    "venue": "Meadowdale High School",
+    "court": "Main",
+    "away_team": "Kamiak",
     "away_score": null,
-    "home_team": "Glacier Peak",
+    "home_team": "Meadowdale",
     "home_score": null,
     "division": "5th Girls",
     "game_type": "Pool A"
   },
   {
     "date": "Sunday, January 25, 2026",
-    "time": "10:30 AM PST",
-    "venue": "Jackson High School",
-    "court": "Court 1",
-    "away_team": "Shorewood",
+    "time": "10:15 AM PST",
+    "venue": "Monroe High School",
+    "court": "Main",
+    "away_team": "Arlington",
     "away_score": null,
-    "home_team": "Jackson",
+    "home_team": "Monroe",
     "home_score": null,
     "division": "5th Girls",
     "game_type": "Pool A"
@@ -769,19 +781,31 @@
   },
   {
     "date": "Sunday, January 25, 2026",
-    "time": "11:15 AM PST",
-    "venue": "Monroe High School",
-    "court": "Main",
-    "away_team": "Arlington",
+    "time": "10:45 AM PST",
+    "venue": "Mountlake Terrace High school",
+    "court": " Aux",
+    "away_team": "Snohomish",
     "away_score": null,
-    "home_team": "Monroe",
+    "home_team": "Mountlake Terrace",
     "home_score": null,
     "division": "5th Girls",
     "game_type": "Pool A"
   },
   {
     "date": "Sunday, January 25, 2026",
-    "time": "12:30 PM PST",
+    "time": "11:30 AM PST",
+    "venue": "Jackson High School",
+    "court": "Court 1",
+    "away_team": "King's",
+    "away_score": null,
+    "home_team": "Jackson",
+    "home_score": null,
+    "division": "5th Girls",
+    "game_type": "Pool A"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
+    "time": "11:30 AM PST",
     "venue": "Valley View Middle School",
     "court": " Aux",
     "away_team": "Shorewood",
@@ -793,12 +817,24 @@
   },
   {
     "date": "Sunday, January 25, 2026",
-    "time": "1:00 PM PST",
-    "venue": "Jackson High School",
-    "court": "Court 1",
-    "away_team": "King's",
+    "time": "12:45 PM PST",
+    "venue": "Meadowdale High School",
+    "court": "Main",
+    "away_team": "Stanwood",
     "away_score": null,
-    "home_team": "Jackson",
+    "home_team": "Meadowdale",
+    "home_score": null,
+    "division": "5th Girls",
+    "game_type": "Pool A"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
+    "time": "12:45 PM PST",
+    "venue": "Monroe High School",
+    "court": "Main",
+    "away_team": "Everett",
+    "away_score": null,
+    "home_team": "Monroe",
     "home_score": null,
     "division": "5th Girls",
     "game_type": "Pool A"
@@ -818,35 +854,11 @@
   {
     "date": "Sunday, January 25, 2026",
     "time": "1:15 PM PST",
-    "venue": "Meadowdale High School",
-    "court": " Aux",
-    "away_team": "Stanwood",
-    "away_score": null,
-    "home_team": "Meadowdale",
-    "home_score": null,
-    "division": "5th Girls",
-    "game_type": "Pool A"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "1:15 PM PST",
     "venue": "Mountlake Terrace High school",
     "court": "Main",
     "away_team": "Lake Stevens",
     "away_score": null,
     "home_team": "Mountlake Terrace",
-    "home_score": null,
-    "division": "5th Girls",
-    "game_type": "Pool A"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "1:45 PM PST",
-    "venue": "Monroe High School",
-    "court": "Main",
-    "away_team": "Everett",
-    "away_score": null,
-    "home_team": "Monroe",
     "home_score": null,
     "division": "5th Girls",
     "game_type": "Pool A"
@@ -865,24 +877,12 @@
   },
   {
     "date": "Sunday, January 25, 2026",
-    "time": "3:45 PM PST",
-    "venue": "Mountlake Terrace High school",
-    "court": " Aux",
-    "away_team": "Snohomish",
+    "time": "2:30 PM PST",
+    "venue": "Kamiak High School",
+    "court": "Main",
+    "away_team": "Stanwood",
     "away_score": null,
-    "home_team": "Mountlake Terrace",
-    "home_score": null,
-    "division": "5th Girls",
-    "game_type": "Pool A"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "5:00 PM PST",
-    "venue": "Meadowdale High School",
-    "court": " Aux",
-    "away_team": "Kamiak",
-    "away_score": null,
-    "home_team": "Meadowdale",
+    "home_team": "Kamiak",
     "home_score": null,
     "division": "5th Girls",
     "game_type": "Pool A"
