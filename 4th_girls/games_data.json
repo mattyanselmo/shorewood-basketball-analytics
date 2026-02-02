@@ -529,15 +529,39 @@
   },
   {
     "date": "Sunday, January 25, 2026",
+    "time": "10:00 AM PST",
+    "venue": "Kamiak High School",
+    "court": " Aux",
+    "away_team": "Stanwood",
+    "away_score": "34",
+    "home_team": "Kamiak",
+    "home_score": "16",
+    "division": "4th Girls",
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
     "time": "10:15 AM PST",
     "venue": "Valley View Middle School",
     "court": " Aux",
     "away_team": "King's",
-    "away_score": null,
+    "away_score": "15",
     "home_team": "Glacier Peak",
-    "home_score": null,
+    "home_score": "20",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
+    "time": "11:15 AM PST",
+    "venue": "Kamiak High School",
+    "court": " Aux",
+    "away_team": "Snohomish",
+    "away_score": "39",
+    "home_team": "Kamiak",
+    "home_score": "15",
+    "division": "4th Girls",
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 25, 2026",
@@ -545,35 +569,23 @@
     "venue": "Monroe High School",
     "court": "Main",
     "away_team": "Shorewood",
-    "away_score": null,
+    "away_score": "19",
     "home_team": "Monroe",
-    "home_score": null,
+    "home_score": "18",
     "division": "4th Girls",
-    "game_type": "Pool A"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "12:00 PM PST",
-    "venue": "Kamiak High School",
-    "court": " Aux",
-    "away_team": "Snohomish",
-    "away_score": null,
-    "home_team": "Kamiak",
-    "home_score": null,
-    "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 25, 2026",
     "time": "12:45 PM PST",
     "venue": "Meadowdale High School",
     "court": " Aux",
-    "away_team": "Stanwood",
-    "away_score": null,
+    "away_team": "Getchell",
+    "away_score": "36",
     "home_team": "Meadowdale",
-    "home_score": null,
+    "home_score": "8",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 25, 2026",
@@ -581,35 +593,23 @@
     "venue": "Valley View Middle School",
     "court": " Aux",
     "away_team": "Snohomish",
-    "away_score": null,
+    "away_score": "39",
     "home_team": "Glacier Peak",
-    "home_score": null,
+    "home_score": "25",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, January 25, 2026",
     "time": "2:00 PM PST",
     "venue": "Meadowdale High School",
     "court": " Aux",
-    "away_team": "Getchell",
-    "away_score": null,
-    "home_team": "Meadowdale",
-    "home_score": null,
-    "division": "4th Girls",
-    "game_type": "Pool A"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "2:30 PM PST",
-    "venue": "Kamiak High School",
-    "court": " Aux",
     "away_team": "Stanwood",
-    "away_score": null,
-    "home_team": "Kamiak",
-    "home_score": null,
+    "away_score": "35",
+    "home_team": "Meadowdale",
+    "home_score": "4",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 1, 2026",
@@ -617,11 +617,11 @@
     "venue": "Stanwood High School",
     "court": " Aux",
     "away_team": "Lake Stevens",
-    "away_score": null,
+    "away_score": "25",
     "home_team": "Stanwood",
-    "home_score": null,
+    "home_score": "23",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 1, 2026",
@@ -629,11 +629,11 @@
     "venue": "Marysville-Getchell High School",
     "court": "Court 2",
     "away_team": "Glacier Peak",
-    "away_score": null,
+    "away_score": "16",
     "home_team": "Getchell",
-    "home_score": null,
+    "home_score": "26",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 1, 2026",
@@ -641,23 +641,23 @@
     "venue": "Stanwood High School",
     "court": " Aux",
     "away_team": "Snohomish",
-    "away_score": null,
+    "away_score": "10",
     "home_team": "Stanwood",
-    "home_score": null,
+    "home_score": "23",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 1, 2026",
     "time": "11:45 AM PST",
     "venue": "Marysville-Getchell High School",
-    "court": "Court 1",
+    "court": "Court 2",
     "away_team": "Lake Stevens",
-    "away_score": null,
+    "away_score": "20",
     "home_team": "Getchell",
-    "home_score": null,
+    "home_score": "12",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 1, 2026",
@@ -665,11 +665,11 @@
     "venue": "King's Garden Gym",
     "court": "Main",
     "away_team": "Meadowdale",
-    "away_score": null,
+    "away_score": "5",
     "home_team": "King's",
-    "home_score": null,
+    "home_score": "21",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 1, 2026",
@@ -677,11 +677,11 @@
     "venue": "Shorewood High School",
     "court": " Aux",
     "away_team": "Kamiak",
-    "away_score": null,
+    "away_score": "9",
     "home_team": "Shorewood",
-    "home_score": null,
+    "home_score": "23",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 1, 2026",
@@ -689,11 +689,11 @@
     "venue": "Haller Middle School",
     "court": " Aux",
     "away_team": "Snohomish",
-    "away_score": null,
+    "away_score": "23",
     "home_team": "Arlington",
-    "home_score": null,
+    "home_score": "20",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 1, 2026",
@@ -701,11 +701,11 @@
     "venue": "King's Garden Gym",
     "court": "Main",
     "away_team": "Kamiak",
-    "away_score": null,
+    "away_score": "19",
     "home_team": "King's",
-    "home_score": null,
+    "home_score": "4",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 1, 2026",
@@ -713,11 +713,11 @@
     "venue": "Shorewood High School",
     "court": " Aux",
     "away_team": "Meadowdale",
-    "away_score": null,
+    "away_score": "11",
     "home_team": "Shorewood",
-    "home_score": null,
+    "home_score": "29",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 1, 2026",
@@ -725,11 +725,11 @@
     "venue": "Haller Middle School",
     "court": " Aux",
     "away_team": "Glacier Peak",
-    "away_score": null,
+    "away_score": "13",
     "home_team": "Arlington",
-    "home_score": null,
+    "home_score": "20",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
