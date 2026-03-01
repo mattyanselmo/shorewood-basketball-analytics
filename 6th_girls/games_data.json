@@ -758,18 +758,6 @@
   {
     "date": "Sunday, January 25, 2026",
     "time": "10:15 AM PST",
-    "venue": "Valley View Middle School",
-    "court": "Main",
-    "away_team": "King's",
-    "away_score": "29",
-    "home_team": "Glacier Peak",
-    "home_score": "27",
-    "division": "6th Girls",
-    "game_type": "Pool A\nFinal"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "10:15 AM PST",
     "venue": "Meadowdale High School",
     "court": "Main",
     "away_team": "Getchell",
@@ -788,6 +776,18 @@
     "away_score": "47",
     "home_team": "Cedarcrest",
     "home_score": "22",
+    "division": "6th Girls",
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
+    "time": "10:15 AM PST",
+    "venue": "Valley View Middle School",
+    "court": "Main",
+    "away_team": "King's",
+    "away_score": "29",
+    "home_team": "Glacier Peak",
+    "home_score": "27",
     "division": "6th Girls",
     "game_type": "Pool A\nFinal"
   },
@@ -842,24 +842,24 @@
   {
     "date": "Sunday, January 25, 2026",
     "time": "12:45 PM PST",
-    "venue": "Valley View Middle School",
-    "court": " Aux",
-    "away_team": "Shorewood",
-    "away_score": "32",
-    "home_team": "Glacier Peak",
-    "home_score": "30",
-    "division": "6th Girls",
-    "game_type": "Pool A\nFinal"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "12:45 PM PST",
     "venue": "Cedarcrest High School",
     "court": "Main",
     "away_team": "Arlington",
     "away_score": "35",
     "home_team": "Cedarcrest",
     "home_score": "21",
+    "division": "6th Girls",
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
+    "time": "12:45 PM PST",
+    "venue": "Valley View Middle School",
+    "court": " Aux",
+    "away_team": "Shorewood",
+    "away_score": "32",
+    "home_team": "Glacier Peak",
+    "home_score": "30",
     "division": "6th Girls",
     "game_type": "Pool A\nFinal"
   },
@@ -902,24 +902,24 @@
   {
     "date": "Sunday, February 1, 2026",
     "time": "9:15 AM PST",
-    "venue": "Marysville-Getchell High School",
-    "court": "Court 1",
-    "away_team": "Snohomish",
-    "away_score": "27",
-    "home_team": "Getchell",
-    "home_score": "46",
-    "division": "6th Girls",
-    "game_type": "Pool A\nFinal"
-  },
-  {
-    "date": "Sunday, February 1, 2026",
-    "time": "9:15 AM PST",
     "venue": "Cedarcrest High School",
     "court": "Main",
     "away_team": "Edmonds-Woodway",
     "away_score": "30",
     "home_team": "Cedarcrest",
     "home_score": "29",
+    "division": "6th Girls",
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Sunday, February 1, 2026",
+    "time": "9:15 AM PST",
+    "venue": "Marysville-Getchell High School",
+    "court": "Court 1",
+    "away_team": "Snohomish",
+    "away_score": "27",
+    "home_team": "Getchell",
+    "home_score": "46",
     "division": "6th Girls",
     "game_type": "Pool A\nFinal"
   },
@@ -1070,14 +1070,26 @@
   {
     "date": "Sunday, February 8, 2026",
     "time": "10:45 AM PST",
-    "venue": "Edmonds-Woodway High School",
-    "court": "Court 1",
+    "venue": "Mountlake Terrace High school",
+    "court": "Main",
     "away_team": "Edmonds-Woodway",
-    "away_score": null,
+    "away_score": "19",
     "home_team": "King's",
-    "home_score": null,
+    "home_score": "37",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Sunday, February 8, 2026",
+    "time": "1:00 PM PST",
+    "venue": "Mountlake Terrace High school",
+    "court": "Main",
+    "away_team": "Mountlake Terrace",
+    "away_score": "42",
+    "home_team": "Edmonds-Woodway",
+    "home_score": "24",
+    "division": "6th Girls",
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1085,11 +1097,11 @@
     "venue": "Snohomish High School",
     "court": " Aux",
     "away_team": "Jackson",
-    "away_score": null,
+    "away_score": "22",
     "home_team": "Snohomish",
-    "home_score": null,
+    "home_score": "48",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1097,11 +1109,11 @@
     "venue": "Lake Stevens High School",
     "court": " Aux",
     "away_team": "Glacier Peak",
-    "away_score": null,
+    "away_score": "24",
     "home_team": "Lake Stevens",
-    "home_score": null,
+    "home_score": "52",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1109,11 +1121,11 @@
     "venue": "Monroe High School",
     "court": "Main",
     "away_team": "Getchell",
-    "away_score": null,
+    "away_score": "29",
     "home_team": "Monroe",
-    "home_score": null,
+    "home_score": "43",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1121,11 +1133,11 @@
     "venue": "Edmonds-Woodway High School",
     "court": "Court 2",
     "away_team": "Kamiak",
-    "away_score": null,
+    "away_score": "26",
     "home_team": "Edmonds-Woodway",
-    "home_score": null,
+    "home_score": "22",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1133,11 +1145,11 @@
     "venue": "Mountlake Terrace High school",
     "court": " Aux",
     "away_team": "Meadowdale",
-    "away_score": null,
+    "away_score": "20",
     "home_team": "Mountlake Terrace",
-    "home_score": null,
+    "home_score": "45",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1145,11 +1157,11 @@
     "venue": "Mike Martin Gym",
     "court": "Main",
     "away_team": "Everett",
-    "away_score": null,
+    "away_score": "33",
     "home_team": "King's",
-    "home_score": null,
+    "home_score": "37",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1157,23 +1169,23 @@
     "venue": "Shorewood High School",
     "court": "Main",
     "away_team": "Arlington",
-    "away_score": null,
+    "away_score": "10",
     "home_team": "Shorewood",
-    "home_score": null,
+    "home_score": "41",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
     "time": "1:45 PM PST",
     "venue": "Snohomish High School",
-    "court": " Aux",
+    "court": "Main",
     "away_team": "Glacier Peak",
-    "away_score": null,
+    "away_score": "4",
     "home_team": "Snohomish",
-    "home_score": null,
+    "home_score": "45",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1181,11 +1193,11 @@
     "venue": "Cedarcrest High School",
     "court": "Main",
     "away_team": "Getchell",
-    "away_score": null,
+    "away_score": "42",
     "home_team": "Cedarcrest",
-    "home_score": null,
+    "home_score": "22",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1193,11 +1205,11 @@
     "venue": "Lake Stevens High School",
     "court": " Aux",
     "away_team": "Jackson",
-    "away_score": null,
+    "away_score": "42",
     "home_team": "Lake Stevens",
-    "home_score": null,
+    "home_score": "55",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1205,11 +1217,11 @@
     "venue": "Edmonds-Woodway High School",
     "court": "Court 1",
     "away_team": "Meadowdale",
-    "away_score": null,
+    "away_score": "54",
     "home_team": "Edmonds-Woodway",
-    "home_score": null,
+    "home_score": "18",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1217,11 +1229,11 @@
     "venue": "Mountlake Terrace High school",
     "court": " Aux",
     "away_team": "Kamiak",
-    "away_score": null,
+    "away_score": "21",
     "home_team": "Mountlake Terrace",
-    "home_score": null,
+    "home_score": "56",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1229,11 +1241,11 @@
     "venue": "Mike Martin Gym",
     "court": "Main",
     "away_team": "Arlington",
-    "away_score": null,
+    "away_score": "22",
     "home_team": "King's",
-    "home_score": null,
+    "home_score": "34",
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -1241,10 +1253,214 @@
     "venue": "Shorewood High School",
     "court": "Main",
     "away_team": "Everett",
-    "away_score": null,
+    "away_score": "39",
     "home_team": "Shorewood",
+    "home_score": "28",
+    "division": "6th Girls",
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "9:00 AM PST",
+    "venue": "Arlington B&G",
+    "court": " Old",
+    "away_team": "Jackson",
+    "away_score": "20",
+    "home_team": "Shorewood",
+    "home_score": "43",
+    "division": "6th Girls",
+    "game_type": "Championship (G1)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "10:15 AM PST",
+    "venue": "Arlington B&G",
+    "court": " Old",
+    "away_team": "Meadowdale",
+    "away_score": "34",
+    "home_team": "Snohomish",
+    "home_score": "42",
+    "division": "6th Girls",
+    "game_type": "Championship (G4)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "11:30 AM PST",
+    "venue": "Arlington B&G",
+    "court": " Old",
+    "away_team": "Cedarcrest",
+    "away_score": "19",
+    "home_team": "Getchell",
+    "home_score": "45",
+    "division": "6th Girls",
+    "game_type": "Championship (G2)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "12:45 PM PST",
+    "venue": "Arlington B&G",
+    "court": " Old",
+    "away_team": "Glacier Peak",
+    "away_score": "34",
+    "home_team": "Everett",
+    "home_score": "15",
+    "division": "6th Girls",
+    "game_type": "Championship (G3)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "2:00 PM PST",
+    "venue": "Arlington B&G",
+    "court": " Old",
+    "away_team": "Kamiak",
+    "away_score": "21",
+    "home_team": "Mountlake Terrace",
+    "home_score": "57",
+    "division": "6th Girls",
+    "game_type": "Championship (G6)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "2:00 PM PST",
+    "venue": "Arlington High School",
+    "court": " Aux",
+    "away_team": "Arlington",
+    "away_score": "18",
+    "home_team": "King's",
+    "home_score": "42",
+    "division": "6th Girls",
+    "game_type": "Championship (G5)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "3:15 PM PST",
+    "venue": "Arlington B&G",
+    "court": " Old",
+    "away_team": "Monroe",
+    "away_score": "43",
+    "home_team": "Glacier Peak",
+    "home_score": "42",
+    "division": "6th Girls",
+    "game_type": "Championship (G8)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "3:15 PM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 1",
+    "away_team": "Shorewood",
+    "away_score": "37",
+    "home_team": "Getchell",
+    "home_score": "44",
+    "division": "6th Girls",
+    "game_type": "Championship (G7)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "4:30 PM PST",
+    "venue": "Arlington B&G",
+    "court": " Old",
+    "away_team": "Snohomish",
+    "away_score": "44",
+    "home_team": "Lake Stevens",
+    "home_score": "48",
+    "division": "6th Girls",
+    "game_type": "Championship (G9)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "5:45 PM PST",
+    "venue": "Arlington B&G",
+    "court": " Old",
+    "away_team": "King's",
+    "away_score": "27",
+    "home_team": "Mountlake Terrace",
+    "home_score": "36",
+    "division": "6th Girls",
+    "game_type": "Championship (G10)\nFinal"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "10:15 AM PST",
+    "venue": "Arlington B&G",
+    "court": "New",
+    "away_team": "Glacier Peak",
+    "away_score": null,
+    "home_team": "Snohomish",
     "home_score": null,
     "division": "6th Girls",
-    "game_type": "Pool A"
+    "game_type": "Championship (G16)"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "10:15 AM PST",
+    "venue": "Arlington B&G",
+    "court": " Old",
+    "away_team": "Jackson",
+    "away_score": null,
+    "home_team": "Cedarcrest",
+    "home_score": null,
+    "division": "6th Girls",
+    "game_type": "Championship (G11)"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "11:30 AM PST",
+    "venue": "Arlington B&G",
+    "court": " Old",
+    "away_team": "Everett",
+    "away_score": null,
+    "home_team": "Meadowdale",
+    "home_score": null,
+    "division": "6th Girls",
+    "game_type": "Championship (G12)"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "12:45 PM PST",
+    "venue": "Arlington High School",
+    "court": " Aux",
+    "away_team": "Arlington",
+    "away_score": null,
+    "home_team": "Kamiak",
+    "home_score": null,
+    "division": "6th Girls",
+    "game_type": "Championship (G13)"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "2:00 PM PST",
+    "venue": "Arlington B&G",
+    "court": "New",
+    "away_team": "Lake Stevens",
+    "away_score": null,
+    "home_team": "Mountlake Terrace",
+    "home_score": null,
+    "division": "6th Girls",
+    "game_type": "Championship (G15)"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "2:00 PM PST",
+    "venue": "Arlington B&G",
+    "court": " Old",
+    "away_team": "Getchell",
+    "away_score": null,
+    "home_team": "Monroe",
+    "home_score": null,
+    "division": "6th Girls",
+    "game_type": "Championship (G14)"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "4:30 PM PST",
+    "venue": "Arlington B&G",
+    "court": "New",
+    "away_team": "W14 (Championship)",
+    "away_score": null,
+    "home_team": "W15 (Championship)",
+    "home_score": null,
+    "division": "6th Girls",
+    "game_type": "Championship (G17)"
   }
 ]

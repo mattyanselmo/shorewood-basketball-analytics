@@ -9,6 +9,9 @@ venv/
 ENV/
 .venv
 
+# WebDriver Manager cache (ChromeDriver etc.)
+.wdm/
+
 # Data files (generated)
 page_source.html
 page_screenshot.png

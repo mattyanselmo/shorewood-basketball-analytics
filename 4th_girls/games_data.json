@@ -98,24 +98,24 @@
   {
     "date": "Sunday, December 7, 2025",
     "time": "4:00 PM PST",
-    "venue": "Port Susan MS",
-    "court": "Main",
-    "away_team": "Glacier Peak",
-    "away_score": "14",
-    "home_team": "Stanwood",
-    "home_score": "36",
-    "division": "4th Girls",
-    "game_type": "Pool A\nFinal"
-  },
-  {
-    "date": "Sunday, December 7, 2025",
-    "time": "4:00 PM PST",
     "venue": "Kamiak High School",
     "court": "Main",
     "away_team": "Arlington",
     "away_score": "6",
     "home_team": "Kamiak",
     "home_score": "16",
+    "division": "4th Girls",
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Sunday, December 7, 2025",
+    "time": "4:00 PM PST",
+    "venue": "Port Susan MS",
+    "court": "Main",
+    "away_team": "Glacier Peak",
+    "away_score": "14",
+    "home_team": "Stanwood",
+    "home_score": "36",
     "division": "4th Girls",
     "game_type": "Pool A\nFinal"
   },
@@ -590,24 +590,24 @@
   {
     "date": "Sunday, January 25, 2026",
     "time": "2:00 PM PST",
-    "venue": "Valley View Middle School",
-    "court": " Aux",
-    "away_team": "Snohomish",
-    "away_score": "39",
-    "home_team": "Glacier Peak",
-    "home_score": "25",
-    "division": "4th Girls",
-    "game_type": "Pool A\nFinal"
-  },
-  {
-    "date": "Sunday, January 25, 2026",
-    "time": "2:00 PM PST",
     "venue": "Meadowdale High School",
     "court": " Aux",
     "away_team": "Stanwood",
     "away_score": "35",
     "home_team": "Meadowdale",
     "home_score": "4",
+    "division": "4th Girls",
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Sunday, January 25, 2026",
+    "time": "2:00 PM PST",
+    "venue": "Valley View Middle School",
+    "court": " Aux",
+    "away_team": "Snohomish",
+    "away_score": "39",
+    "home_team": "Glacier Peak",
+    "home_score": "25",
     "division": "4th Girls",
     "game_type": "Pool A\nFinal"
   },
@@ -737,11 +737,11 @@
     "venue": "Monroe High School",
     "court": "Main",
     "away_team": "Getchell",
-    "away_score": null,
+    "away_score": "13",
     "home_team": "Monroe",
-    "home_score": null,
+    "home_score": "32",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -749,11 +749,11 @@
     "venue": "Shorewood High School",
     "court": " Aux",
     "away_team": "Arlington",
-    "away_score": null,
+    "away_score": "5",
     "home_team": "Shorewood",
-    "home_score": null,
+    "home_score": "24",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -761,11 +761,11 @@
     "venue": "Monroe High School",
     "court": "Main",
     "away_team": "Stanwood",
-    "away_score": null,
+    "away_score": "43",
     "home_team": "Monroe",
-    "home_score": null,
+    "home_score": "31",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -773,11 +773,11 @@
     "venue": "King's Garden Gym",
     "court": "Main",
     "away_team": "Arlington",
-    "away_score": null,
+    "away_score": "22",
     "home_team": "King's",
-    "home_score": null,
+    "home_score": "20",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -785,11 +785,11 @@
     "venue": "Snohomish High School",
     "court": " Aux",
     "away_team": "Glacier Peak",
-    "away_score": null,
+    "away_score": "6",
     "home_team": "Snohomish",
-    "home_score": null,
+    "home_score": "21",
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Pool A\nFinal"
   },
   {
     "date": "Sunday, February 22, 2026",
@@ -797,10 +797,202 @@
     "venue": "Lake Stevens High School",
     "court": " Aux",
     "away_team": "Meadowdale",
+    "away_score": "6",
+    "home_team": "Lake Stevens",
+    "home_score": "24",
+    "division": "4th Girls",
+    "game_type": "Pool A\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "9:00 AM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 1",
+    "away_team": "Lake Stevens",
+    "away_score": "36",
+    "home_team": "Kamiak",
+    "home_score": "10",
+    "division": "4th Girls",
+    "game_type": "Championship (G1)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "9:00 AM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 2",
+    "away_team": "Snohomish",
+    "away_score": "22",
+    "home_team": "Getchell",
+    "home_score": "17",
+    "division": "4th Girls",
+    "game_type": "Championship (G2)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "10:15 AM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 1",
+    "away_team": "Stanwood",
+    "away_score": "23",
+    "home_team": "Jackson",
+    "home_score": "24",
+    "division": "4th Girls",
+    "game_type": "Championship (G3)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "10:15 AM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 2",
+    "away_team": "Shorewood",
+    "away_score": "30",
+    "home_team": "Monroe",
+    "home_score": "14",
+    "division": "4th Girls",
+    "game_type": "Championship (G4)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "11:30 AM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 1",
+    "away_team": "Meadowdale",
+    "away_score": "13",
+    "home_team": "King's",
+    "home_score": "18",
+    "division": "4th Girls",
+    "game_type": "Championship (G5)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "11:30 AM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 2",
+    "away_team": "Arlington",
+    "away_score": "24",
+    "home_team": "Glacier Peak",
+    "home_score": "15",
+    "division": "4th Girls",
+    "game_type": "Championship (G6)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "12:45 PM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 2",
+    "away_team": "Kamiak",
+    "away_score": "7",
+    "home_team": "Shorewood",
+    "home_score": "28",
+    "division": "4th Girls",
+    "game_type": "Championship (G7)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "2:00 PM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 2",
+    "away_team": "Getchell",
+    "away_score": "26",
+    "home_team": "Arlington",
+    "home_score": "15",
+    "division": "4th Girls",
+    "game_type": "Championship (G8)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "4:30 PM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 1",
+    "away_team": "Stanwood",
+    "away_score": "52",
+    "home_team": "King's",
+    "home_score": "14",
+    "division": "4th Girls",
+    "game_type": "Championship (G9)\nFinal"
+  },
+  {
+    "date": "Saturday, February 28, 2026",
+    "time": "4:30 PM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 2",
+    "away_team": "Monroe",
+    "away_score": "30",
+    "home_team": "Snohomish",
+    "home_score": "20",
+    "division": "4th Girls",
+    "game_type": "Championship (G10)\nFinal"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "9:00 AM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 1",
+    "away_team": "Shorewood",
+    "away_score": null,
+    "home_team": "Getchell",
+    "home_score": null,
+    "division": "4th Girls",
+    "game_type": "Championship (G11)"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "9:00 AM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 2",
+    "away_team": "Stanwood",
+    "away_score": null,
+    "home_team": "Monroe",
+    "home_score": null,
+    "division": "4th Girls",
+    "game_type": "Championship (G12)"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "11:30 AM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 1",
+    "away_team": "Jackson",
+    "away_score": null,
+    "home_team": "W11 (Championship)",
+    "home_score": null,
+    "division": "4th Girls",
+    "game_type": "Championship (G13)"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "11:30 AM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 2",
+    "away_team": "W12 (Championship)",
     "away_score": null,
     "home_team": "Lake Stevens",
     "home_score": null,
     "division": "4th Girls",
-    "game_type": "Pool A"
+    "game_type": "Championship (G14)"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "12:45 PM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 2",
+    "away_team": "Meadowdale",
+    "away_score": null,
+    "home_team": "Glacier Peak",
+    "home_score": null,
+    "division": "4th Girls",
+    "game_type": "Championship (G16)"
+  },
+  {
+    "date": "Sunday, March 1, 2026",
+    "time": "2:00 PM PST",
+    "venue": "Marysville-Pilchuck High School",
+    "court": "Court 2",
+    "away_team": "W13 (Championship)",
+    "away_score": null,
+    "home_team": "W14 (Championship)",
+    "home_score": null,
+    "division": "4th Girls",
+    "game_type": "Championship (G15)"
   }
 ]

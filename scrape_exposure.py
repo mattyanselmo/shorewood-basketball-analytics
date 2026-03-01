@@ -7,10 +7,13 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.driver_cache import DriverCacheManager
 import time
+import os
 import json
 import re
 from datetime import datetime
@@ -25,9 +28,14 @@ def setup_driver(headless=False):
     chrome_options.add_argument('--disable-blink-features=AutomationControlled')
     chrome_options.add_argument('user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')
     
-    # Try to create driver (will use system ChromeDriver if available)
+    # Use webdriver-manager to auto-download the correct ChromeDriver for your Chrome version.
+    # Cache is stored in project .wdm so it works even when ~ is not writable.
     try:
-        driver = webdriver.Chrome(options=chrome_options)
+        project_root = os.path.dirname(os.path.abspath(__file__))
+        cache = DriverCacheManager(root_dir=project_root)
+        driver_path = ChromeDriverManager(cache_manager=cache).install()
+        service = ChromeService(driver_path)
+        driver = webdriver.Chrome(service=service, options=chrome_options)
         return driver
     except Exception as e:
         print(f"Error setting up Chrome driver: {e}")
